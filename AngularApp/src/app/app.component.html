@@ -1,0 +1,19 @@
+<h2>Form</h2>
+
+<form #addEmp="ngForm" (ngSubmit)="onSubmit(addEmp)">
+  <input type="text" name="firstName" placeholder="First name" ngModel />
+
+  <input type="text" name="lastName" placeholder="Last name" ngModel />
+
+  <input type="date" name="birthDate" placeholder="Birth date" ngModel />
+
+  <input type="date" name="hiredDate" placeholder="Hired date" ngModel />
+
+  <input type="text" name="gender" placeholder="Gender" ngModel />
+
+  <input type="submit" value="Add" />
+</form>
+
+<p *ngFor="let emp of employees">
+  {{emp.first_name}}
+</p>
