@@ -4,11 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { EmpAddFormComponent } from './emp-add-form/emp-add-form.component';
+import { EmpDisplayComponent } from './emp-display/emp-display.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, HttpClientModule, CommonModule, EmpAddFormComponent],
+  imports: [EmpDisplayComponent, RouterOutlet, FormsModule, HttpClientModule, CommonModule, EmpAddFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
