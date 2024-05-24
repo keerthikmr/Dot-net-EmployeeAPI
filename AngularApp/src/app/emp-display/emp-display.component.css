@@ -1,0 +1,10 @@
+.employee-heading {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(165, 174, 181);
+    border-radius: 1rem;
+    margin: 1rem;
+    padding: 1rem;;
+    text-align: center;
+}
+

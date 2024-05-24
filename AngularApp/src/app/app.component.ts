@@ -14,5 +14,4 @@ import { EmpDisplayComponent } from './emp-display/emp-display.component';
 })
 export class AppComponent {
   title = 'AngularApp';
-  
 }
