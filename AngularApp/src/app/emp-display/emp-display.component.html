@@ -2,6 +2,15 @@
     Employees
 </div>
 
-<p *ngFor="let emp of employees">
-    {{emp.first_name}}
-</p>
+<div class="emp-container"> 
+    <mat-list>
+        <mat-list-item *ngFor="let emp of employees">
+            <span matListItemTitle>
+                {{emp.first_name}}
+            </span>
+            <span matListItemLine>
+                Title
+            </span>
+        </mat-list-item>
+    </mat-list>
+</div>

@@ -9,7 +9,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 
-
 @Component({
   selector: 'app-emp-add-form',
   standalone: true,
@@ -40,9 +39,9 @@ export class EmpAddFormComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup ) {
-    console.log(form.value.birth_date);
+
     if (form.valid) {
-      console.log('works submit');
+      console.log(form.value.birth_date);
       const formData = new FormData();
       formData.append('first_name', form.value.first_name);
       formData.append('last_name', form.value.last_name);
