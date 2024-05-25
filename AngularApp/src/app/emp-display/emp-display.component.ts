@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-emp-display',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MatListModule],
+  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule],
   templateUrl: './emp-display.component.html',
   styleUrl: './emp-display.component.css'
 })
@@ -31,5 +32,8 @@ export class EmpDisplayComponent {
   info(id: number){
     console.log(id);
   }
-  
+
+  addEmployee() {
+    console.log('adding');
+  }
 }

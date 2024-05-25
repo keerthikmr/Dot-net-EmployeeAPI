@@ -1,9 +1,14 @@
 <div class="employee-heading">
-    Employees
+    <div>
+        Employees
+    </div>
+    <div class="add-emp-btn">
+        <button mat-raised-button color="primary" (click)="addEmployee()">Add Employee</button>
+    </div>
 </div>
 
 <div class="emp-container"> 
-    <mat-action-list>
+    <mat-action-list class="emp-list">
         <button mat-list-item *ngFor="let emp of employees" (click)="info(emp.emp_no)">
             <span matListItemTitle>
                 {{emp.first_name}}
