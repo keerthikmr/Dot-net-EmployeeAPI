@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\keerthi.kumar.cm\\source\\repos\\Dot-net-EmployeeAPI\\EmployeeAPI\\EmployeeAPI\\EmployeeAPI.csproj": {}
+    "C:\\Users\\ADMIN\\Documents\\repos\\Dot-net-EmployeeAPI\\EmployeeAPI\\EmployeeAPI\\EmployeeAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\keerthi.kumar.cm\\source\\repos\\Dot-net-EmployeeAPI\\EmployeeAPI\\EmployeeAPI\\EmployeeAPI.csproj": {
+    "C:\\Users\\ADMIN\\Documents\\repos\\Dot-net-EmployeeAPI\\EmployeeAPI\\EmployeeAPI\\EmployeeAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\keerthi.kumar.cm\\source\\repos\\Dot-net-EmployeeAPI\\EmployeeAPI\\EmployeeAPI\\EmployeeAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ADMIN\\Documents\\repos\\Dot-net-EmployeeAPI\\EmployeeAPI\\EmployeeAPI\\EmployeeAPI.csproj",
         "projectName": "EmployeeAPI",
-        "projectPath": "C:\\Users\\keerthi.kumar.cm\\source\\repos\\Dot-net-EmployeeAPI\\EmployeeAPI\\EmployeeAPI\\EmployeeAPI.csproj",
-        "packagesPath": "C:\\Users\\keerthi.kumar.cm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\keerthi.kumar.cm\\source\\repos\\Dot-net-EmployeeAPI\\EmployeeAPI\\EmployeeAPI\\obj\\",
+        "projectPath": "C:\\Users\\ADMIN\\Documents\\repos\\Dot-net-EmployeeAPI\\EmployeeAPI\\EmployeeAPI\\EmployeeAPI.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ADMIN\\Documents\\repos\\Dot-net-EmployeeAPI\\EmployeeAPI\\EmployeeAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\keerthi.kumar.cm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -82,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

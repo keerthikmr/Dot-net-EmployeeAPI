@@ -43,7 +43,7 @@ namespace EmployeeAPI.Controllers
         public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string birth_date, [FromForm] string gender, [FromForm] string hired_date)
         {
 
-            string query = "insert into employee values (@birth_date, @first_name, @last_name, @gender, @hired_date)";
+            string query = "insert into employee values (@first_name, @last_name, @gender, @birth_date, @hired_date)";
             DataTable table = new DataTable();
 
             string SqlDatasource = _configuration.GetConnectionString("employee");
