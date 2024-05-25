@@ -3,14 +3,14 @@
 </div>
 
 <div class="emp-container"> 
-    <mat-list>
-        <mat-list-item *ngFor="let emp of employees">
+    <mat-action-list>
+        <button mat-list-item *ngFor="let emp of employees" (click)="info(emp.emp_no)">
             <span matListItemTitle>
                 {{emp.first_name}}
             </span>
             <span matListItemLine>
                 Title
             </span>
-        </mat-list-item>
-    </mat-list>
+        </button>
+    </mat-action-list>
 </div>

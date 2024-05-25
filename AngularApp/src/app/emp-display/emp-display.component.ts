@@ -27,4 +27,9 @@ export class EmpDisplayComponent {
       this.employees = data;
     });
   }
+
+  info(id: number){
+    console.log(id);
+  }
+  
 }
