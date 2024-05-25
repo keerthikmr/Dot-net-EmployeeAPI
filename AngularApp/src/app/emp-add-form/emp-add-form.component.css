@@ -22,3 +22,14 @@
 .form-field {
     width: 40%;
 }
+
+.employee-heading {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(165, 174, 181);
+    border-radius: 1rem;
+    margin: 5rem 5rem 1rem 5rem;
+    padding: 1rem;;
+    text-align: center;
+}
+
