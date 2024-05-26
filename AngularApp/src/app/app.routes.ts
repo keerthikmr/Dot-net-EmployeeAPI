@@ -6,6 +6,7 @@ import { DepartmentDisplayComponent } from './department-display/department-disp
 import { DepartmentAddComponent } from './department-add/department-add.component';
 
 export const routes: Routes = [
+    { path: '', component: EmpDisplayComponent },
     { path: 'employees', component: EmpDisplayComponent },
     { path: 'employees/add', component: EmpAddFormComponent },
     { path: 'salaries', component: SalaryDisplayComponent },
