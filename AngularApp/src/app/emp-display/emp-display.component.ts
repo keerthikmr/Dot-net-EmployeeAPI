@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-emp-display',
@@ -17,7 +18,7 @@ export class EmpDisplayComponent {
   employees: any = [];
   new_employee: any = {};
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.getEmployees();
@@ -33,7 +34,7 @@ export class EmpDisplayComponent {
     console.log(id);
   }
 
-  addEmployee() {
-    console.log('adding');
+  goToPage(url : string) {
+    this.router.navigate([url]);
   }
 }
