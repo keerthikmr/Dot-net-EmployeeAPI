@@ -1,0 +1,23 @@
+a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+}
+
+.header-list {
+    background-color: rgb(175, 189, 202);
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
+}
