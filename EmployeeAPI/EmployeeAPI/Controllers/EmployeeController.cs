@@ -38,11 +38,35 @@ namespace EmployeeAPI.Controllers
             return new JsonResult(table);
         }
 
+        [HttpGet("get_employee/{emp_no}")]
+        public JsonResult get_employee(int emp_no)
+        {
+            string query = "select * from employee where emp_no=@emp_no";
+            DataTable table = new DataTable();
+
+            string dataSource = _configuration.GetConnectionString("employee");
+            SqlDataReader reader;
+
+            using (SqlConnection connection = new SqlConnection(dataSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@emp_no", emp_no);
+                    reader = command.ExecuteReader();
+                    table.Load(reader);
+                }
+            }
+            
+            return new JsonResult(table);
+        }
+
+
         [HttpPost("add_employee")]
 
-        public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string birth_date, [FromForm] string gender, [FromForm] string hired_date)
+        public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date)
         {
-
             string query = "insert into employee values (@first_name, @last_name, @gender, @birth_date, @hired_date)";
             DataTable table = new DataTable();
 
@@ -58,9 +82,10 @@ namespace EmployeeAPI.Controllers
                 {
                     myCommand.Parameters.AddWithValue("@first_name", first_name);
                     myCommand.Parameters.AddWithValue("@last_name", last_name);
+                    myCommand.Parameters.AddWithValue("@gender", gender);
                     myCommand.Parameters.AddWithValue("@birth_date", birth_date);
                     myCommand.Parameters.AddWithValue("@hired_date", hired_date);
-                    myCommand.Parameters.AddWithValue("@gender", gender);
+
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                 }
