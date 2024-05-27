@@ -6,7 +6,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { PopupService } from '../popup/popup.service';
 import { EmpDetailComponent } from '../emp-detail/emp-detail.component';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-emp-display',
   standalone: true,
