@@ -9,7 +9,7 @@
 
 <div class="emp-container"> 
     <mat-action-list class="emp-list">
-        <button mat-list-item *ngFor="let emp of employees" (click)="info(emp.emp_no)">
+        <button mat-list-item *ngFor="let emp of employees" (click)="openPopup(emp.emp_no)">
             <span matListItemTitle>
                 {{emp.first_name}}
             </span>
@@ -19,5 +19,3 @@
         </button>
     </mat-action-list>
 </div>
-
-<button (click)="openPopup()">Open popup</button>

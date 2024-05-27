@@ -9,8 +9,12 @@ import { EmpDetailComponent } from '../emp-detail/emp-detail.component';
 export class PopupService {
   constructor(private dialog: MatDialog) {}
 
-  openPopup() {
-    this.dialog.open(EmpDetailComponent);
+  openPopup(id: number) {
+    const dialogRef = this.dialog.open(EmpDetailComponent, {
+      data: { id: id }
+    });
+
+    dialogRef.componentInstance.id = id;
   }
 
   closePopup() {

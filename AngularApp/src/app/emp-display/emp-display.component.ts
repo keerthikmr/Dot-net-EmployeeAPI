@@ -5,11 +5,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { PopupService } from '../popup/popup.service';
+import { EmpDetailComponent } from '../emp-detail/emp-detail.component';
 
 @Component({
   selector: 'app-emp-display',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule],
+  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent],
   templateUrl: './emp-display.component.html',
   styleUrl: './emp-display.component.css'
 })
@@ -21,10 +22,10 @@ export class EmpDisplayComponent {
 
   constructor(private http: HttpClient, private router: Router, private popupService: PopupService) {}
 
-  openPopup() {
-    this.popupService.openPopup();
+  openPopup(id: number) {
+    this.popupService.openPopup(id);
   }
-  
+
   ngOnInit() {
     this.getEmployees();
   }
@@ -33,10 +34,6 @@ export class EmpDisplayComponent {
     this.http.get(this.API_URL + '/get_all_employees').subscribe(data => {
       this.employees = data;
     });
-  }
-
-  info(id: number){
-    console.log(id);
   }
 
   goToPage(url : string) {
