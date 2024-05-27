@@ -4,6 +4,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { PopupService } from '../popup/popup.service';
 
 @Component({
   selector: 'app-emp-display',
@@ -18,8 +19,12 @@ export class EmpDisplayComponent {
   employees: any = [];
   new_employee: any = {};
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private popupService: PopupService) {}
 
+  openPopup() {
+    this.popupService.openPopup();
+  }
+  
   ngOnInit() {
     this.getEmployees();
   }

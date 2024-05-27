@@ -35,11 +35,6 @@ export class EmpAddFormComponent implements OnInit {
   }
 
   formattedDate(ogDate: Date) {
-    // const date = ogDate.getDate();
-    // const month = ogDate.getMonth();
-    // const year = ogDate.getFullYear();
-    // return `${year}-${month}-${date}`;
-
     const result = ogDate.toLocaleDateString("fr-CA", {
       year: "numeric",
       month: "2-digit",
