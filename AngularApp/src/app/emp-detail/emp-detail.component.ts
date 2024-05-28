@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EmpDetailComponent {
   API_URL = 'http://localhost:8000';
-  employees: any = [];
+  employee: any = {};
 
   @Input()
   id: number = 0;
@@ -22,13 +22,13 @@ export class EmpDetailComponent {
 
   ngOnInit() {
     this.http.get(this.API_URL + `/get_employee/${this.id}`).subscribe(data => {
-      this.employees = data;
-      console.log(this.employees);
+      
+      this.employee = data;
+      this.employee = this.employee[0];
     });
   }
 
   closePopup() {
     this.PopupService.closePopup();
-    console.log(this.id);
   }
 }
