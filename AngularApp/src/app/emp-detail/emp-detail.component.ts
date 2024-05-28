@@ -4,7 +4,10 @@ import { Input } from '@angular/core';
 import { EmpDisplayComponent } from '../emp-display/emp-display.component';
 import { HttpClient } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
-
+import { Injectable } from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-emp-detail',
   standalone: true,

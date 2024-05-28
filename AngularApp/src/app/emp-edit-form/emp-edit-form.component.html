@@ -9,7 +9,7 @@
             Employee ID:
         </span>
         <mat-form-field class="form-field">
-        <input matInput formControlName="emp_id" placeholder="Employee ID"  readonly="readonly" value={{id}}>
+        <input matInput formControlName="emp_no" placeholder="Employee ID" value={{id}} readonly>
         </mat-form-field>
     </div>
 
@@ -18,7 +18,7 @@
             First Name:
         </span>
         <mat-form-field class="form-field">
-        <input matInput formControlName="first_name" placeholder="First Name">
+        <input matInput formControlName="first_name" placeholder="First Name" value={{employee.first_name}}>
         </mat-form-field>
     </div>
   
@@ -27,7 +27,7 @@
             Last Name:
         </span>
         <mat-form-field class="form-field">
-        <input matInput formControlName="last_name" placeholder="Last Name">
+        <input matInput formControlName="last_name" placeholder="Last Name" value={{employee.last_name}}>
         </mat-form-field>
     </div>
 
@@ -49,7 +49,7 @@
         </span>
     
         <mat-form-field class="form-field">
-            <input matInput [matDatepicker]="picker" formControlName="birth_date" placeholder="Birth Date">
+            <input matInput [matDatepicker]="picker" formControlName="birth_date" placeholder="Birth Date" value={{employee.birth_date}}>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -61,7 +61,7 @@
         </span>
         
         <mat-form-field class="form-field">
-            <input matInput [matDatepicker]="hiredPicker" formControlName="hired_date" placeholder="Hired Date">
+            <input matInput [matDatepicker]="hiredPicker" formControlName="hired_date" placeholder="Hired Date" value={{employee.hired_date}}>
             <mat-datepicker-toggle matSuffix [for]="hiredPicker"></mat-datepicker-toggle>
             <mat-datepicker #hiredPicker></mat-datepicker>
         </mat-form-field>

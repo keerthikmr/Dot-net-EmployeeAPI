@@ -9,15 +9,19 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import { DateAdapter } from '@angular/material/core';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-emp-edit-form',
   standalone: true,
-  imports: [MatButtonModule, FormsModule, CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatNativeDateModule, MatInputModule],
+  imports: [MatButtonModule, FormsModule, CommonModule, HttpClientModule, MatIconModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatNativeDateModule, MatInputModule],
   templateUrl: './emp-edit-form.component.html',
   styleUrl: './emp-edit-form.component.css'
 })
-export class EmpEditFormComponent {
+export class EmpEditFormComponent implements OnInit{
+  API_URL = 'http://localhost:8000';
+  employee: any = {};
+
   userForm: FormGroup = new FormGroup({});
   
   constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>) {
@@ -26,6 +30,25 @@ export class EmpEditFormComponent {
 
   @Input()
   id: number = 0;
+
+  ngOnInit() {
+    this.userForm = this.fb.group({
+      birth_date: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      gender: ['', Validators.required],
+      hired_date: ['', Validators.required],
+      emp_no: ['', Validators.required]
+    });
+  
+    this.http.get(this.API_URL + `/get_employee/${this.id}`).subscribe(data => {
+      
+      this.employee = data;
+      this.employee = this.employee[0];
+    });
+  
+  }
+    
 
   formattedDate(ogDate: Date) {
     const result = ogDate.toLocaleDateString("fr-CA", {
@@ -56,5 +79,7 @@ export class EmpEditFormComponent {
         });
     }
   }
-
+  getGender () {
+    return this.employee.gender;
+  }
 }

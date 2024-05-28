@@ -23,6 +23,7 @@ export class PopupService {
   }
 
   openEditPopup(id: number) {
+    this.closePopup();
     const dialogRef = this.dialog.open(EmpEditFormComponent, {
       data: { id: id }
     });
