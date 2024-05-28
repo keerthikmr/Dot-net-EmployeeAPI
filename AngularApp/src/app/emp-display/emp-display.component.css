@@ -26,3 +26,33 @@
     position: absolute;
     right: 1rem;
 }
+
+.mat-list-item {
+    display: flex;
+    flex-direction: row;
+}   
+
+.emp-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.emp-table th,
+.emp-table td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.emp-table th {
+    background-color: rgb(165, 174, 181);
+    font-weight: bold;
+}
+
+.emp-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.emp-table tr:hover {
+    background-color: #ddd;
+}

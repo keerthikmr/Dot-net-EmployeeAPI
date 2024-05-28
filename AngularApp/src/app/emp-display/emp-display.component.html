@@ -8,14 +8,30 @@
 </div>
 
 <div class="emp-container"> 
-    <mat-action-list class="emp-list">
-        <button mat-list-item *ngFor="let emp of employees" (click)="openPopup(emp.emp_no)">
-            <span matListItemTitle>
-                {{emp.first_name}}
-            </span>
-            <span matListItemLine>
-                Title
-            </span>
-        </button>
-    </mat-action-list>
+    <table class="emp-table">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Full Name</th>
+                <th>Position</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let emp of employees">
+                <td>{{emp.emp_no}}</td>
+                <td>{{ emp.first_name + ' ' + emp.last_name}} </td>
+                <td>Title</td>
+                <td>{{ emp.gender }}</td>
+                <td>{{getAge(emp.birth_date)}}</td>
+                <td>
+                    <button mat-icon-button color="primary" (click)="openDetail(emp.emp_no)">
+                        <mat-icon>info</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

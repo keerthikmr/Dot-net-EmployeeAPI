@@ -31,4 +31,8 @@ export class EmpDetailComponent {
   closePopup() {
     this.PopupService.closePopup();
   }
+
+  editEmp(){
+    console.log('editing');
+  }
 }

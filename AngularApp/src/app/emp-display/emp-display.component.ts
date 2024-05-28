@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { PopupService } from '../popup/popup.service';
 import { EmpDetailComponent } from '../emp-detail/emp-detail.component';
 import { Injectable } from '@angular/core';
+import {MatIconModule} from '@angular/material/icon';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ import { Injectable } from '@angular/core';
 @Component({
   selector: 'app-emp-display',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent],
+  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule],
   templateUrl: './emp-display.component.html',
   styleUrl: './emp-display.component.css'
 })
@@ -26,10 +27,6 @@ export class EmpDisplayComponent {
 
   constructor(private http: HttpClient, private router: Router, private popupService: PopupService) {}
 
-  openPopup(id: number) {
-    this.popupService.openPopup(id);
-  }
-
   ngOnInit() {
     this.getEmployees();
   }
@@ -38,6 +35,20 @@ export class EmpDisplayComponent {
     this.http.get(this.API_URL + '/get_all_employees').subscribe(data => {
       this.employees = data;
     });
+  }
+  getAge(birthDate: string) {
+    const today = new Date();
+    let age = today.getFullYear() - Number(birthDate.slice(0, 4));
+
+    const monthDiff = today.getMonth() - Number(birthDate.slice(5,7));
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < Number(birthDate.slice(8, 10)))) {
+      age--;
+    }
+    return age;
+  }
+
+  openDetail(id: number) {
+    this.popupService.openPopup(id);
   }
 
   goToPage(url : string) {
