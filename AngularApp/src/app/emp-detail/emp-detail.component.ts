@@ -3,11 +3,12 @@ import { PopupService } from '../popup/popup.service';
 import { Input } from '@angular/core';
 import { EmpDisplayComponent } from '../emp-display/emp-display.component';
 import { HttpClient } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-emp-detail',
   standalone: true,
-  imports: [EmpDisplayComponent],
+  imports: [EmpDisplayComponent, MatButtonModule],
   templateUrl: './emp-detail.component.html',
   styleUrl: './emp-detail.component.css'
 })

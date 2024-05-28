@@ -1,0 +1,53 @@
+.dialog-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail-view {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.emp-detail-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 1rem;
+}
+
+.emp-detail-table th,
+.emp-detail-table td {
+    padding: 1rem;
+    margin: 1rem;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.emp-detail-table th {
+    background-color: rgb(165, 174, 181);
+    font-weight: bold;
+    width: 30%;
+}
+
+.emp-detail-table tr {
+    width: 60%;
+}
+
+.emp-detail-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.emp-detail-table tr:hover {
+    background-color: #ddd;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
