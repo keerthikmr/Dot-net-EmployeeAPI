@@ -34,6 +34,6 @@ export class EmpDetailComponent {
   }
 
   editEmp(){
-    console.log('editing');
+    this.PopupService.openEditPopup(this.id);
   }
 }
