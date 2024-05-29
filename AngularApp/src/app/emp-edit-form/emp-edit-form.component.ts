@@ -24,7 +24,7 @@ export class EmpEditFormComponent implements OnInit{
 
   userForm: FormGroup = new FormGroup({});
   
-  constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>, private router: Router) {
     this.dateAdapter.setLocale('en-GB');
   }
 
@@ -84,6 +84,8 @@ export class EmpEditFormComponent implements OnInit{
       this.http.post('http://localhost:8000/add_employee', formData).subscribe((response) => {
           console.log(response);
           form.reset();
+          window.location.reload();
+
         }, (error) => {
           console.error(error);
         });
