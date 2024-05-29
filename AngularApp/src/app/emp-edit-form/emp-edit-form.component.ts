@@ -59,6 +59,9 @@ export class EmpEditFormComponent implements OnInit{
 
 
   formattedDate(ogDate: Date) {
+    if (typeof(ogDate) == 'string') {
+      return ogDate;
+    }
     const result = ogDate.toLocaleDateString("fr-CA", {
       year: "numeric",
       month: "2-digit",
