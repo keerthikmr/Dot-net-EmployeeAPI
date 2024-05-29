@@ -45,7 +45,7 @@ export class EmpAddFormComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup ) {
-
+    console.log(form);
     if (form.valid) {
       console.log(form.value.birth_date);
       const formData = new FormData();

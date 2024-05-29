@@ -38,7 +38,6 @@ export class EmpEditFormComponent implements OnInit{
       last_name: ['', Validators.required],
       gender: ['', Validators.required],
       hired_date: ['', Validators.required],
-      emp_no: ['', Validators.required]
     });
     
 
@@ -48,12 +47,15 @@ export class EmpEditFormComponent implements OnInit{
       this.employee = data;
       this.employee = this.employee[0];
       
-      // Preset the gender value in the form
+      // Preset the employee values in the form
       this.userForm.controls['gender'].setValue(this.employee.gender)
+      this.userForm.controls['first_name'].setValue(this.employee.first_name)
+      this.userForm.controls['last_name'].setValue(this.employee.last_name)
+      this.userForm.controls['birth_date'].setValue(this.employee.birth_date)
+      this.userForm.controls['hired_date'].setValue(this.employee.hired_date)
     });
     
   }
-    
 
 
   formattedDate(ogDate: Date) {
@@ -66,10 +68,10 @@ export class EmpEditFormComponent implements OnInit{
   }
 
   onSubmit(form: FormGroup ) {
-
+    
     if (form.valid) {
-      console.log(form.value.birth_date);
       const formData = new FormData();
+
       formData.append('first_name', form.value.first_name);
       formData.append('last_name', form.value.last_name);
       formData.append('gender', form.value.gender);
