@@ -9,7 +9,7 @@
             Employee ID:
         </span>
         <mat-form-field class="form-field">
-        <input matInput formControlName="emp_no" placeholder="Employee ID" value={{id}} readonly>
+        <input matInput formControlName="emp_no" placeholder="Employee ID" value={{employee.emp_no}} readonly>
         </mat-form-field>
     </div>
 
@@ -37,8 +37,8 @@
         </span>
         <mat-form-field class="form-field">
         <mat-select formControlName="gender" placeholder="Gender">
-            <mat-option value="male">Male</mat-option>
-            <mat-option value="female">Female</mat-option>
+            <mat-option value="Male">Male</mat-option>
+            <mat-option value="Female">Female</mat-option>
         </mat-select>
         </mat-form-field>
     </div>

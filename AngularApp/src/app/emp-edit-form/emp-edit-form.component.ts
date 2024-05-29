@@ -40,15 +40,21 @@ export class EmpEditFormComponent implements OnInit{
       hired_date: ['', Validators.required],
       emp_no: ['', Validators.required]
     });
-  
+    
+
     this.http.get(this.API_URL + `/get_employee/${this.id}`).subscribe(data => {
       
+      // data[0] isn't accesiible, so assign it to a variable
       this.employee = data;
       this.employee = this.employee[0];
+      
+      // Preset the gender value in the form
+      this.userForm.controls['gender'].setValue(this.employee.gender)
     });
-  
+    
   }
     
+
 
   formattedDate(ogDate: Date) {
     const result = ogDate.toLocaleDateString("fr-CA", {
@@ -56,7 +62,6 @@ export class EmpEditFormComponent implements OnInit{
       month: "2-digit",
       day: "2-digit",
     })
-    console.log(result);
     return result;
   }
 
@@ -78,8 +83,5 @@ export class EmpEditFormComponent implements OnInit{
           console.error(error);
         });
     }
-  }
-  getGender () {
-    return this.employee.gender;
   }
 }
