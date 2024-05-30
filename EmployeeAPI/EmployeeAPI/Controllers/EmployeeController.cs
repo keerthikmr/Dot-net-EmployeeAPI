@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using System.Data;
+using System.Reflection.PortableExecutable;
+using System.Text;
 
 namespace EmployeeAPI.Controllers
 {
@@ -63,6 +65,8 @@ namespace EmployeeAPI.Controllers
         }
 
 
+
+
         [HttpPost("add_employee")]
 
         public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date)
@@ -91,6 +95,37 @@ namespace EmployeeAPI.Controllers
                 }
             }
             return new JsonResult("Added successfully");
+        }
+
+        [HttpPost("delete_employee/")]
+        public async Task<IActionResult> DeleteEmployee()
+        {
+            using (StreamReader Preader = new StreamReader(Request.Body, Encoding.UTF8))
+            {
+                string content = await Preader.ReadToEndAsync();
+                int emp_no = int.Parse(content);
+            
+
+                string query = "DELETE FROM employee WHERE emp_no=@emp_no";
+                DataTable table = new DataTable();
+
+                string dataSource = _configuration.GetConnectionString("employee");
+                SqlDataReader reader;
+
+                using (SqlConnection connection = new SqlConnection(dataSource))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@emp_no", emp_no);
+                        reader = command.ExecuteReader();
+                        table.Load(reader);
+                    }
+                }
+            }
+
+            return new JsonResult("Deleted Successfully");
         }
 
 
