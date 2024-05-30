@@ -8,6 +8,12 @@
   padding: 1.5rem;
 }
 
+.emp-delete-btn {
+    color: white;
+    background-color:red;
+    padding: 1.5rem;
+}
+
 .field-div{
     display: flex;
     flex-direction: row;
@@ -33,3 +39,8 @@
     text-align: center;
 }
 
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}

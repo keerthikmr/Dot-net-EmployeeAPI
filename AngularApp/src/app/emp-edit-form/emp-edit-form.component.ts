@@ -24,7 +24,7 @@ export class EmpEditFormComponent implements OnInit{
 
   userForm: FormGroup = new FormGroup({});
   
-  constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>, private router: Router) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>) {
     this.dateAdapter.setLocale('en-GB');
   }
 
@@ -39,7 +39,6 @@ export class EmpEditFormComponent implements OnInit{
       gender: ['', Validators.required],
       hired_date: ['', Validators.required],
     });
-    
 
     this.http.get(this.API_URL + `/get_employee/${this.id}`).subscribe(data => {
       
@@ -56,7 +55,6 @@ export class EmpEditFormComponent implements OnInit{
     });
     
   }
-
 
   formattedDate(ogDate: Date) {
     if (typeof(ogDate) == 'string') {
@@ -85,10 +83,16 @@ export class EmpEditFormComponent implements OnInit{
           console.log(response);
           form.reset();
           window.location.reload();
-
         }, (error) => {
           console.error(error);
         });
     }
+  }
+
+  empDelete(id: number){
+    this.http.post(this.API_URL + `/delete_employee/`, id).subscribe(data => {
+      console.log(data);
+      window.location.reload();
+    });
   }
 }

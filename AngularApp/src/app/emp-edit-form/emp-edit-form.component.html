@@ -2,7 +2,7 @@
     Edit employee
 </div>
 
-<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" class="add-emp-form">
+<form [formGroup]="userForm" class="add-emp-form">
 
     <div class="field-div">
         <span class="field-title">
@@ -66,5 +66,8 @@
             <mat-datepicker #hiredPicker></mat-datepicker>
         </mat-form-field>
     </div>
-    <button mat-raised-button class="emp-submit-btn" color="accent" type="submit" color="primary" >Submit</button>
+    <div class="btn-container">
+        <button mat-raised-button class="emp-delete-btn" color="accent" (click)="empDelete(employee.emp_no)">Delete</button>
+        <button mat-raised-button class="emp-submit-btn" color="primary" (click)="onSubmit(userForm)" >Submit</button>
+    </div>
   </form>
