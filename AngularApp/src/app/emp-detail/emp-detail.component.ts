@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { PopupService } from '../popup/popup.service';
 import { Input } from '@angular/core';
-import { EmpDisplayComponent } from '../emp-display/emp-display.component';
 import { HttpClient } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { Injectable } from '@angular/core';
+
 @Injectable({
   providedIn: 'root'
 })
 @Component({
   selector: 'app-emp-detail',
   standalone: true,
-  imports: [EmpDisplayComponent, MatButtonModule],
+  imports: [MatButtonModule],
   templateUrl: './emp-detail.component.html',
   styleUrl: './emp-detail.component.css'
 })
@@ -22,7 +22,7 @@ export class EmpDetailComponent {
   @Input()
   id: number = 0;
   
-  constructor(private http: HttpClient, private PopupService: PopupService, private empDisplayComp : EmpDisplayComponent) {}
+  constructor(private http: HttpClient, private PopupService: PopupService) {}
 
   ngOnInit() {
     this.http.get(this.API_URL + `/get_employee/${this.id}`).subscribe(data => {

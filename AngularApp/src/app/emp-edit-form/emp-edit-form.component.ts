@@ -9,6 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import { NativeDateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, DateAdapter } from '@angular/material/core';
+import { PopupService } from '../popup/popup.service';
 
 @Component({
   selector: 'app-emp-edit-form',
@@ -24,7 +25,7 @@ export class EmpEditFormComponent implements OnInit{
 
   userForm: FormGroup = new FormGroup({});
   
-  constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>, private popup: PopupService) {
     this.dateAdapter.setLocale('en-GB');
   }
 
@@ -90,9 +91,10 @@ export class EmpEditFormComponent implements OnInit{
   }
 
   empDelete(id: number){
-    this.http.post(this.API_URL + `/delete_employee/`, id).subscribe(data => {
-      console.log(data);
-      window.location.reload();
-    });
+    this.popup.openDeleteConfPopup(id);        
+    // this.http.post(this.API_URL + `/delete_employee/`, id).subscribe(data => {
+    //   console.log(data);
+    //   window.location.reload();
+    // });
   }
 }
