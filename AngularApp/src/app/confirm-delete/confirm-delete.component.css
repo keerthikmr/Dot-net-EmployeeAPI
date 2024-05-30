@@ -1,3 +1,15 @@
-.small-dialog .mat-dialog-container {
-    width: 80%; /* adjust as needed */
-  }
+.confirm-box {
+    text-align: center;
+}
+
+.cnf-box-content {
+    height: 99%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.confirm-entry {
+    width: 40%;
+}

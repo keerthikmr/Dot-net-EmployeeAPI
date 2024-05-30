@@ -9,7 +9,7 @@ body { margin: 0; font-family:'Courier New', Courier, monospace; }
 }
 
 .small-dialog { /* For confirm delete box */
-    width: 50%; 
-    height: 30%;
+    width: 70%; 
+    height: 50%;
 }
 
