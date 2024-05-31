@@ -65,9 +65,9 @@ namespace EmployeeAPI.Controllers
         }
 
         [HttpPost("add_employee")]
-        public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date)
+        public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date, [FromForm] int title_id)
         {
-            string query = "insert into employee values (@first_name, @last_name, @gender, @birth_date, @hired_date)";
+            string query = "insert into employee values (@first_name, @last_name, @gender, @birth_date, @hired_date, @title_id)";
             DataTable table = new DataTable();
 
             string SqlDatasource = _configuration.GetConnectionString("employee");
@@ -85,6 +85,7 @@ namespace EmployeeAPI.Controllers
                     myCommand.Parameters.AddWithValue("@gender", gender);
                     myCommand.Parameters.AddWithValue("@birth_date", birth_date);
                     myCommand.Parameters.AddWithValue("@hired_date", hired_date);
+                    myCommand.Parameters.AddWithValue("@title_id", title_id);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
