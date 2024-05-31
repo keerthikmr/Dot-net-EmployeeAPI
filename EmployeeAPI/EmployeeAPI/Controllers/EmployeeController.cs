@@ -229,10 +229,10 @@ namespace EmployeeAPI.Controllers
 
         [HttpPost("add_title")]
 
-        public JsonResult add_title([FromForm] int dept_no, [FromForm] string title_name, [FromForm] string from_date)
+        public JsonResult add_title([FromForm] int dept_no, [FromForm] string title_name)
         {
 
-            string query = "insert into titles values (@title_name, @from_date, @dept_no)";
+            string query = "insert into titles values (@title_name, @dept_no)";
             DataTable table = new DataTable();
 
             string SqlDatasource = _configuration.GetConnectionString("employee");
@@ -246,7 +246,6 @@ namespace EmployeeAPI.Controllers
                 {
                     myCommand.Parameters.AddWithValue("@dept_no", dept_no);
                     myCommand.Parameters.AddWithValue("@title_name", title_name);
-                    myCommand.Parameters.AddWithValue("@from_date", from_date);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
