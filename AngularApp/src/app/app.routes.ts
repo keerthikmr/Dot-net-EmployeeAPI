@@ -4,7 +4,8 @@ import { EmpAddFormComponent } from './emp-add-form/emp-add-form.component';
 import { SalaryDisplayComponent } from './salary-display/salary-display.component';
 import { DepartmentDisplayComponent } from './department-display/department-display.component';
 import { DepartmentAddComponent } from './department-add/department-add.component';
-import { LoadComponent } from './load/load.component';
+import { TitleAddComponent } from './title-add/title-add.component';
+import { TitleDisplayComponent } from './title-display/title-display.component';
 
 export const routes: Routes = [
     { path: '', component: EmpDisplayComponent },
@@ -13,5 +14,6 @@ export const routes: Routes = [
     { path: 'salaries', component: SalaryDisplayComponent },
     { path: 'departments', component: DepartmentDisplayComponent },
     { path: 'departments/add', component: DepartmentAddComponent },
-    { path: 'load', component: LoadComponent}
+    { path: 'titles/add', component: TitleAddComponent },
+    { path: 'titles/display', component: TitleDisplayComponent}
 ];
