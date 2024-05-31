@@ -19,6 +19,9 @@ import { Router } from '@angular/router';
   styleUrl: './emp-add-form.component.css'
 })
 export class EmpAddFormComponent implements OnInit {
+  
+  titles: any = [];
+
   userForm: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>, private router: Router) {
@@ -31,7 +34,12 @@ export class EmpAddFormComponent implements OnInit {
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       gender: ['', Validators.required],
+      title: ['', Validators.required],
       hired_date: ['', Validators.required]
+    });
+    
+    this.http.get('http://localhost:8000' + '/get_all_titles').subscribe(data => {
+      this.titles = data;
     });
   }
 
@@ -52,6 +60,7 @@ export class EmpAddFormComponent implements OnInit {
       formData.append('first_name', form.value.first_name);
       formData.append('last_name', form.value.last_name);
       formData.append('gender', form.value.gender);
+      formData.append('title', form.value.title);
       formData.append('birth_date', this.formattedDate(form.value.birth_date));
       formData.append('hired_date', this.formattedDate(form.value.hired_date));
 
