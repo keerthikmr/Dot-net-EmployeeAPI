@@ -64,11 +64,7 @@ namespace EmployeeAPI.Controllers
             return new JsonResult(table);
         }
 
-
-
-
         [HttpPost("add_employee")]
-
         public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date)
         {
             string query = "insert into employee values (@first_name, @last_name, @gender, @birth_date, @hired_date)";
@@ -95,6 +91,36 @@ namespace EmployeeAPI.Controllers
                 }
             }
             return new JsonResult("Added successfully");
+        }
+
+        [HttpPost("edit_employee")]
+        public JsonResult edit_employee([FromForm] int emp_no, [FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date)
+        {
+            string query = "UPDATE employee SET first_name=@first_name, last_name=@last_name, gender=@gender, birth_date=@birth_date, hired_date=@hired_date WHERE emp_no=@emp_no";
+            DataTable table = new DataTable();
+
+            string SqlDatasource = _configuration.GetConnectionString("employee");
+            SqlDataReader myReader;
+
+            using (SqlConnection mycon = new SqlConnection(SqlDatasource))
+            {
+
+                mycon.Open();
+
+                using (SqlCommand myCommand = new SqlCommand(query, mycon))
+                {
+                    myCommand.Parameters.AddWithValue("@emp_no", emp_no);
+                    myCommand.Parameters.AddWithValue("@first_name", first_name);
+                    myCommand.Parameters.AddWithValue("@last_name", last_name);
+                    myCommand.Parameters.AddWithValue("@gender", gender);
+                    myCommand.Parameters.AddWithValue("@birth_date", birth_date);
+                    myCommand.Parameters.AddWithValue("@hired_date", hired_date);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                }
+            }
+            return new JsonResult("Edited successfully");
         }
 
         [HttpPost("delete_employee/")]
