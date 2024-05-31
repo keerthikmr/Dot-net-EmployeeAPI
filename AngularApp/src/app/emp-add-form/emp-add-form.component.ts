@@ -46,16 +46,16 @@ export class EmpAddFormComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup ) {
-    console.log(form);
+    console.log(form)
     if (form.valid) {
-      console.log(form.value.birth_date);
+
       const formData = new FormData();
       formData.append('first_name', form.value.first_name);
       formData.append('last_name', form.value.last_name);
       formData.append('gender', form.value.gender);
       formData.append('birth_date', this.formattedDate(form.value.birth_date));
       formData.append('hired_date', this.formattedDate(form.value.hired_date));
-  
+
       this.http.post('http://localhost:8000/add_employee', formData).subscribe((response) => {
           console.log(response);
           this.router.navigate(['/employees']);

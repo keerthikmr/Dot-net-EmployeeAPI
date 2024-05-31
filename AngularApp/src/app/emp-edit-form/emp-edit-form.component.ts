@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import { NativeDateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, DateAdapter } from '@angular/material/core';
 import { PopupService } from '../popup/popup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-emp-edit-form',
@@ -25,7 +26,7 @@ export class EmpEditFormComponent implements OnInit{
 
   userForm: FormGroup = new FormGroup({});
   
-  constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>, private popup: PopupService) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>, private popup: PopupService, private router: Router) {
     this.dateAdapter.setLocale('en-GB');
   }
 
@@ -34,6 +35,7 @@ export class EmpEditFormComponent implements OnInit{
 
   ngOnInit() {
     this.userForm = this.fb.group({
+      emp_no: ['', Validators.required],
       birth_date: ['', Validators.required],
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
@@ -48,6 +50,7 @@ export class EmpEditFormComponent implements OnInit{
       this.employee = this.employee[0];
       
       // Preset the employee values in the form
+      this.userForm.controls['emp_no'].setValue(this.employee.emp_no)
       this.userForm.controls['gender'].setValue(this.employee.gender)
       this.userForm.controls['first_name'].setValue(this.employee.first_name)
       this.userForm.controls['last_name'].setValue(this.employee.last_name)
@@ -69,21 +72,28 @@ export class EmpEditFormComponent implements OnInit{
     return result;
   }
 
+  // To reload the same page (reflect changes)
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([uri])});
+  }
+
   onSubmit(form: FormGroup ) {
-    
+    console.log(form);
     if (form.valid) {
       const formData = new FormData();
 
+      formData.append('emp_no', form.value.emp_no);
       formData.append('first_name', form.value.first_name);
       formData.append('last_name', form.value.last_name);
       formData.append('gender', form.value.gender);
       formData.append('birth_date', this.formattedDate(form.value.birth_date));
       formData.append('hired_date', this.formattedDate(form.value.hired_date));
-  
-      this.http.post('http://localhost:8000/add_employee', formData).subscribe((response) => {
+
+      this.http.post('http://localhost:8000/edit_employee', formData).subscribe((response) => {
           console.log(response);
-          form.reset();
-          window.location.reload();
+          this.popup.closePopup();
+          this.redirectTo('/employees');
         }, (error) => {
           console.error(error);
         });

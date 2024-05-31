@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialogClose } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirm-delete',
@@ -17,7 +17,7 @@ export class ConfirmDeleteComponent {
   @Input()
   id: number = 0;
 
-  constructor (private http: HttpClient, private router: Router){}
+  constructor (private http: HttpClient, private router: Router, private dialog: MatDialog){}
 
   API_URL = 'http://localhost:8000';
 
@@ -32,6 +32,6 @@ export class ConfirmDeleteComponent {
       console.log(data);
       this.redirectTo('/employees');
     });
+    this.dialog.closeAll();  
   }
-
 }
