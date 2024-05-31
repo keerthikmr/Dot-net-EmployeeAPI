@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-emp-add-form',
   standalone: true,
-  imports: [MatButtonModule, FormsModule, CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatNativeDateModule, MatInputModule],
+  imports: [MatButtonModule, CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatNativeDateModule, MatInputModule],
   templateUrl: './emp-add-form.component.html',
   styleUrl: './emp-add-form.component.css'
 })
@@ -48,7 +48,6 @@ export class EmpAddFormComponent implements OnInit {
   onSubmit(form: FormGroup ) {
     console.log(form)
     if (form.valid) {
-
       const formData = new FormData();
       formData.append('first_name', form.value.first_name);
       formData.append('last_name', form.value.last_name);

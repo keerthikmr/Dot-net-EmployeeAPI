@@ -36,6 +36,7 @@ export class EmpDisplayComponent {
       this.employees = data;
     });
   }
+  
   getAge(birthDate: string) {
     const today = new Date();
     let age = today.getFullYear() - Number(birthDate.slice(0, 4));
