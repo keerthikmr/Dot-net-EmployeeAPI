@@ -180,7 +180,6 @@ namespace EmployeeAPI.Controllers
 
 
         [HttpPost("add_dept")]
-
         public JsonResult add_dept([FromForm] string dept)
         {
 
@@ -203,6 +202,57 @@ namespace EmployeeAPI.Controllers
                 }
             }
             return new JsonResult("Added successfully");
+        }
+
+        [HttpGet("get_all_titles")]
+
+        public JsonResult get_all_titles()
+        {
+            string query = "select * from titles";
+            DataTable table = new DataTable();
+
+            string dataSource = _configuration.GetConnectionString("employee");
+            SqlDataReader reader;
+
+            using (SqlConnection connection = new SqlConnection(dataSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    reader = command.ExecuteReader();
+                    table.Load(reader);
+                }
+            }
+            return new JsonResult(table);
+        }
+
+        [HttpPost("add_title")]
+
+        public JsonResult add_title([FromForm] int dept_no, [FromForm] string title_name, [FromForm] string from_date)
+        {
+
+            string query = "insert into titles values (@title_name, @from_date, @dept_no)";
+            DataTable table = new DataTable();
+
+            string SqlDatasource = _configuration.GetConnectionString("employee");
+            SqlDataReader myReader;
+
+            using (SqlConnection mycon = new SqlConnection(SqlDatasource))
+            {
+                mycon.Open();
+
+                using (SqlCommand myCommand = new SqlCommand(query, mycon))
+                {
+                    myCommand.Parameters.AddWithValue("@dept_no", dept_no);
+                    myCommand.Parameters.AddWithValue("@title_name", title_name);
+                    myCommand.Parameters.AddWithValue("@from_date", from_date);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                }
+            }
+            return new JsonResult("Title added successfully");
         }
     }
 }
