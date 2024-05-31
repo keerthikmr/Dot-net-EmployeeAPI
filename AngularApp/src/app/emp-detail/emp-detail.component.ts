@@ -31,7 +31,11 @@ export class EmpDetailComponent {
       this.employee = this.employee[0];
     });
   }
-
+sliceFunction(data:any){
+  let test=data.slice(0,10);
+  console.log(test)
+return data.slice(0,10);
+}
   closePopup() {
     this.PopupService.closePopup();
   }
