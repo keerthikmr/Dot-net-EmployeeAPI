@@ -22,17 +22,5 @@
         </mat-form-field>
     </div>
 
-    <div class="field-div">
-        <span class="field-title">
-            From Date:
-        </span>
-        
-        <mat-form-field class="form-field">
-            <input matInput [matDatepicker]="fromPicker" formControlName="from_date" placeholder="From Date">
-            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
-            <mat-datepicker #fromPicker></mat-datepicker>
-        </mat-form-field>
-    </div>
-
     <button mat-raised-button class="title-submit-btn" color="accent" type="submit" color="primary" >Submit</button>
   </form>

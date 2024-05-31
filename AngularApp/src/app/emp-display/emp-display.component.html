@@ -24,7 +24,7 @@
             <tr *ngFor="let emp of employees">
                 <td>{{emp.emp_no}}</td>
                 <td>{{ emp.first_name + ' ' + emp.last_name}} </td>
-                <td>Title</td>
+                <td>{{emp.title_name}}</td>
                 <td>{{ emp.gender }}</td>
                 <td>{{getAge(emp.birth_date)}}</td>
                 <td>
