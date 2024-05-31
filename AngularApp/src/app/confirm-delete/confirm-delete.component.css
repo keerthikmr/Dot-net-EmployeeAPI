@@ -13,3 +13,9 @@
 .confirm-entry {
     width: 40%;
 }
+
+.confirm-del-btn {
+    margin: 0rem 1rem;
+    color: white;
+    background-color: red;
+}

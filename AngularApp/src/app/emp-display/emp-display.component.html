@@ -17,6 +17,7 @@
                 <th>Gender</th>
                 <th>Age</th>
                 <th>Details</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,11 @@
                 <td>
                     <button mat-icon-button color="primary" (click)="openDetail(emp.emp_no)">
                         <mat-icon>info</mat-icon>
+                    </button>
+                </td>
+                <td>
+                    <button mat-icon-button color="primary" (click)="deleteEmp(emp.emp_no)">
+                        <mat-icon>delete</mat-icon>
                     </button>
                 </td>
             </tr>

@@ -54,4 +54,8 @@ export class EmpDisplayComponent {
   goToPage(url : string) {
     this.router.navigate([url]);
   }
+
+  deleteEmp(id: number){
+    this.popupService.openDeleteConfPopup(id);
+  }
 }

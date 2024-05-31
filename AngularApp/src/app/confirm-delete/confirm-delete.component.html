@@ -9,13 +9,12 @@
             This will erase all data relating to the employee and is <strong>irreversible</strong>
         </p>
         <span>
-            Type <strong>"{{id}}"</strong> in the box below to confirm deletion
+            Are you sure you want to do this?
         </span>
 
-        <input type="text" class="confirm-entry" id="confirm-del-entry">
-        <!-- change to mat button and input box and get confirmation getelebyid or form -->
-        <button>
-            Confirm
-        </button>
+        <div>
+            <button mat-raised-button (click)="confirmDel()" mat-dialog-close class="confirm-del-btn">Confirm</button>
+            <button mat-raised-button mat-dialog-close color="accent">Go back</button>
+        </div>
     </div>
 </section>

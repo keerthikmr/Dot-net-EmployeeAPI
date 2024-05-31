@@ -9,6 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import { DateAdapter } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-emp-add-form',
@@ -20,7 +21,7 @@ import { DateAdapter } from '@angular/material/core';
 export class EmpAddFormComponent implements OnInit {
   userForm: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private dateAdapter: DateAdapter<Date>, private router: Router) {
     this.dateAdapter.setLocale('en-GB');
   }
 
@@ -57,7 +58,7 @@ export class EmpAddFormComponent implements OnInit {
   
       this.http.post('http://localhost:8000/add_employee', formData).subscribe((response) => {
           console.log(response);
-          form.reset();
+          this.router.navigate(['/employees']);
         }, (error) => {
           console.error(error);
         });

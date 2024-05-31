@@ -92,9 +92,5 @@ export class EmpEditFormComponent implements OnInit{
 
   empDelete(id: number){
     this.popup.openDeleteConfPopup(id);        
-    // this.http.post(this.API_URL + `/delete_employee/`, id).subscribe(data => {
-    //   console.log(data);
-    //   window.location.reload();
-    // });
   }
 }
