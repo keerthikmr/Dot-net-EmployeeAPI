@@ -13,23 +13,22 @@
             <tr>
                 <th>Title ID</th>
                 <th>Title Name</th>
-                <th>Details</th>
+                <th>Base salary</th>
+                <th>Department</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let title of titles">
                 <td>{{title.title_id}}</td>
                 <td>{{title.title_name}}</td>
+                <td>{{title.base_salary}}</td>
+                <td>{{title.dept_no}}</td>
                 <td>
                     <button mat-icon-button color="primary" (click)="openDetail(title.title_id)">
-                        <mat-icon>info</mat-icon>
-                    </button>
-                </td>
-                <!-- <td>
-                    <button mat-icon-button color="primary" (click)="deleteEmp(emp.emp_no)">
                         <mat-icon>delete</mat-icon>
                     </button>
-                </td> -->
+                </td>
             </tr>
         </tbody>
     </table>

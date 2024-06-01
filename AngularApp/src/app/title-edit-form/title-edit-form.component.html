@@ -1,0 +1,49 @@
+<div class="employee-heading">
+    Edit employee
+</div>
+
+<form [formGroup]="userForm" class="add-emp-form">
+
+    <div class="field-div">
+        <span class="field-title">
+            Title ID:
+        </span>
+        <mat-form-field class="form-field">
+        <input matInput formControlName="title_id" placeholder="Title ID" value={{title.title_id}} readonly>
+        </mat-form-field>
+    </div>
+
+    <div class="field-div">
+        <span class="field-title">
+            Title Name:
+        </span>
+        <mat-form-field class="form-field">
+        <input matInput formControlName="title_name" placeholder="Title Name" value={{title.title_name}}>
+        </mat-form-field>
+    </div>
+  
+    <div class="field-div">
+        <span class="field-title">
+            Base Salary:
+        </span>
+        <mat-form-field class="form-field">
+        <input matInput formControlName="base_salary" placeholder="Base Salary" value={{title.base_salary}}>
+        </mat-form-field>
+    </div>
+
+    <div class="field-div">
+        <span class="field-title">
+            Department:
+        </span>
+        <mat-form-field class="form-field">
+        <mat-select formControlName="department" placeholder="Department">
+            <mat-option *ngFor="let dept of depts" value={{title.dept_no}}>{{title.dept_name}}</mat-option>
+        </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="btn-container">
+        <button mat-raised-button class="emp-delete-btn" color="accent" (click)="titleDelete(title.title_id)">Delete</button>
+        <button mat-raised-button class="emp-submit-btn" color="primary" (click)="onSubmit(userForm)" >Make changes</button>
+    </div>
+  </form>
