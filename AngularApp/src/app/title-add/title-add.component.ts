@@ -51,7 +51,7 @@ export class TitleAddComponent {
 
       this.http.post('http://localhost:8000/add_title', formData).subscribe((response) => {
           console.log(response);
-          this.router.navigate(['/titles/display']);
+          this.router.navigate(['/titles']);
         }, (error) => {
           console.error(error);
         });

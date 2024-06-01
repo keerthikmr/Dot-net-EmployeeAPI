@@ -14,8 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './confirm-delete.component.css'
 })
 export class ConfirmDeleteComponent {
-  @Input()
-  id: number = 0;
+  @Input() id: number = 0;
+  @Input() type: string = '';
 
   constructor (private http: HttpClient, private router: Router, private dialog: MatDialog){}
 
@@ -28,9 +28,17 @@ export class ConfirmDeleteComponent {
   }
 
   confirmDel(){
-    this.http.post(this.API_URL + `/delete_employee/`, this.id).subscribe(data => {
+    let suffix = '';
+
+    console.log(this.type);
+    if (this.type == 'employee'){
+      suffix = '/delete_employee/';
+    } else {
+      suffix = '/delete_title/';
+    }
+    this.http.post(this.API_URL + suffix, this.id).subscribe(data => {
       console.log(data);
-      this.redirectTo('/employees');
+      this.redirectTo(this.type + 's');
     });
     this.dialog.closeAll();  
   }

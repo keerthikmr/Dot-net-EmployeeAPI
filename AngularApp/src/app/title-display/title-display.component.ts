@@ -4,6 +4,7 @@ import { NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import { PopupService } from '../popup/popup.service';
 
 @Component({
   selector: 'app-title-display',
@@ -16,7 +17,7 @@ export class TitleDisplayComponent {
 
   titles: any = [];
 
-  constructor (private router: Router, private http: HttpClient) {}
+  constructor (private router: Router, private http: HttpClient, private popup: PopupService) {}
   
   ngOnInit(){
     this.getTitles();
@@ -32,7 +33,7 @@ export class TitleDisplayComponent {
     this.router.navigate([url]);
   }
 
-  openDetail(emp_no: number){
-
+  openDelete(title_id: number){
+    this.popup.openDeleteConfPopup(title_id, 'title');
   }
 }

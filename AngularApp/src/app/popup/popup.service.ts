@@ -32,12 +32,14 @@ export class PopupService {
     dialogRef.componentInstance.id = id;
   }
 
-  openDeleteConfPopup(id: number) {
+  openDeleteConfPopup(id: number, opType: string) {
+  
     const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
-      data: { id: id },
+      data: { id: id, type: opType},
       panelClass: 'small-dialog'
     });
 
     dialogRef.componentInstance.id = id;
+    dialogRef.componentInstance.type = opType;
   }
 }

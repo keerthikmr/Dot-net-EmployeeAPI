@@ -101,6 +101,6 @@ export class EmpEditFormComponent implements OnInit{
   }
 
   empDelete(id: number){
-    this.popup.openDeleteConfPopup(id);        
+    this.popup.openDeleteConfPopup(id, 'employee');        
   }
 }

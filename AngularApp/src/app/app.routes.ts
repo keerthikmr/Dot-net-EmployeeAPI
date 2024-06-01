@@ -15,5 +15,5 @@ export const routes: Routes = [
     { path: 'departments', component: DepartmentDisplayComponent },
     { path: 'departments/add', component: DepartmentAddComponent },
     { path: 'titles/add', component: TitleAddComponent },
-    { path: 'titles/display', component: TitleDisplayComponent}
+    { path: 'titles', component: TitleDisplayComponent}
 ];

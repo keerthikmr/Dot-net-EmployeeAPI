@@ -57,6 +57,6 @@ export class EmpDisplayComponent {
   }
 
   deleteEmp(id: number){
-    this.popupService.openDeleteConfPopup(id);
+    this.popupService.openDeleteConfPopup(id, 'employee');
   }
 }
