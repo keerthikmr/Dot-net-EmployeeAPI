@@ -2,7 +2,7 @@
   <h2 mat-dialog-title>Detailed view</h2>
 
   <div mat-dialog-content class="detail-view">
-      
+    
       <table class="emp-detail-table">
         <tr>
           <th>Employee Number</th>
@@ -17,12 +17,20 @@
           <td>{{employee.last_name}}</td>
         </tr>
         <tr>
+          <th>Gender</th>
+          <td>{{employee.gender}}</td>
+        </tr>
+        <tr>
+          <th>Age</th>
+          <td>{{getAge()}}</td>
+        </tr>
+        <tr>
           <th>Position</th>
           <td>{{employee.title_name}}</td>
         </tr>
         <tr>
-          <th>Gender</th>
-          <td>{{employee.gender}}</td>
+          <th>Salary</th>
+          <td>{{employee.salary}}</td>
         </tr>
         <tr>
           <th>Birth Date</th>
@@ -33,10 +41,15 @@
           <td>{{sliceFunction(employee.hired_date)}}</td>
         </tr>
       </table>
+      
+  <div mat-dialog-actions>
+    <button button mat-raised-button color="primary" (click)="editEmp()">
+      Edit
+    </button>
+    <button button mat-raised-button color="primary" (click)="closePopup()" class="close-btn">
+      X
+    </button>
+  </div>
   </div>
 
-  <div mat-dialog-actions>
-    <button button mat-raised-button color="primary" (click)="editEmp()">Edit</button>
-    <button button mat-raised-button color="primary" (click)="closePopup()" class="close-btn">Close</button>
-  </div>
 </section>

@@ -4,6 +4,7 @@ import { Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { Injectable } from '@angular/core';
+import { EmpDisplayComponent } from '../emp-display/emp-display.component';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class EmpDetailComponent {
   @Input()
   id: number = 0;
   
-  constructor(private http: HttpClient, private PopupService: PopupService) {}
+  constructor(private http: HttpClient, private PopupService: PopupService, private empDisplayComp: EmpDisplayComponent) {}
 
   ngOnInit() {
     this.http.get(this.API_URL + `/get_employee/${this.id}`).subscribe(data => {
@@ -31,16 +32,20 @@ export class EmpDetailComponent {
       this.employee = this.employee[0];
     });
   }
-sliceFunction(data:any){
-  let test=data.slice(0,10);
-  console.log(test)
-return data.slice(0,10);
-}
+  
+  sliceFunction(data:any){
+    return data.slice(0,10);
+  }
+  
   closePopup() {
     this.PopupService.closePopup();
   }
 
   editEmp(){
     this.PopupService.openEditPopup(this.id);
+  }
+
+  getAge(){
+    return this.empDisplayComp.getAge(this.employee.birth_date);
   }
 }
