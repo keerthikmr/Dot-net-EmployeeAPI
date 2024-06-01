@@ -228,6 +228,32 @@ namespace EmployeeAPI.Controllers
             return new JsonResult(table);
         }
 
+
+        [HttpGet("get_title/{title_id}")]
+        public JsonResult get_title(int title_id)
+        {
+            string query = "select * from titles where title_id=@title_id;";
+            DataTable table = new DataTable();
+
+            string dataSource = _configuration.GetConnectionString("employee");
+            SqlDataReader reader;
+
+            using (SqlConnection connection = new SqlConnection(dataSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@title_id", title_id);
+                    reader = command.ExecuteReader();
+                    table.Load(reader);
+                }
+            }
+
+            return new JsonResult(table);
+        }
+
+
         [HttpPost("add_title")]
 
         public JsonResult add_title([FromForm] int dept_no, [FromForm] string title_name, [FromForm] int base_salary)
