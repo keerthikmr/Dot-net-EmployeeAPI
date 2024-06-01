@@ -65,9 +65,20 @@ namespace EmployeeAPI.Controllers
         }
 
         [HttpPost("add_employee")]
-        public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date, [FromForm] int title_id)
+        public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date, [FromForm] int title_id, [FromForm] int base_salary, [FromForm] string sal_operation, [FromForm] int salary_modifier)
         {
-            string query = "insert into employee values (@first_name, @last_name, @gender, @birth_date, @hired_date, @title_id)";
+            int salary;
+
+            if (String.Equals(sal_operation, '+'))
+            {
+                salary = base_salary + salary_modifier;
+            } else
+            {
+                salary = base_salary - salary_modifier;
+            }
+
+
+            string query = "insert into employee values (@first_name, @last_name, @gender, @birth_date, @hired_date, @title_id, @salary)";
             DataTable table = new DataTable();
 
             string SqlDatasource = _configuration.GetConnectionString("employee");
@@ -86,6 +97,7 @@ namespace EmployeeAPI.Controllers
                     myCommand.Parameters.AddWithValue("@birth_date", birth_date);
                     myCommand.Parameters.AddWithValue("@hired_date", hired_date);
                     myCommand.Parameters.AddWithValue("@title_id", title_id);
+                    myCommand.Parameters.AddWithValue("@salary", salary);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -279,6 +291,37 @@ namespace EmployeeAPI.Controllers
                 }
             }
             return new JsonResult("Title added successfully");
+        }
+
+        [HttpPost("delete_title/")]
+        public async Task<IActionResult> TitleEmployee()
+        {
+            using (StreamReader Preader = new StreamReader(Request.Body, Encoding.UTF8))
+            {
+                string content = await Preader.ReadToEndAsync();
+                int title_id = int.Parse(content);
+
+
+                string query = "DELETE FROM titles WHERE title_id=@title_id";
+                DataTable table = new DataTable();
+
+                string dataSource = _configuration.GetConnectionString("employee");
+                SqlDataReader reader;
+
+                using (SqlConnection connection = new SqlConnection(dataSource))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@title_id", title_id);
+                        reader = command.ExecuteReader();
+                        table.Load(reader);
+                    }
+                }
+            }
+
+            return new JsonResult("Title deleted Successfully");
         }
     }
 }
