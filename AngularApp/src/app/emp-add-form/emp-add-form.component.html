@@ -47,11 +47,19 @@
 
     <div class="field-div">
         <span class="field-title" id="base_salary_display">
-            Base Salary:
+            Modify Base Salary:
         </span>
-        <mat-form-field class="form-field">
-        <input matInput formControlName="last_name" placeholder="+/- Base salary">
-        </mat-form-field>
+        <div class="sal-modi-div">
+            <mat-form-field class="sal-operation">
+                <mat-select formControlName="sal_operation" placeholder="+/-">
+                    <mat-option value='+'>+</mat-option>
+                    <mat-option value='-'>-</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="base-salary">
+                <input matInput formControlName="salary_modifier" placeholder="+/- Base salary">
+            </mat-form-field>
+        </div>
     </div>
 
     <div class="field-div">

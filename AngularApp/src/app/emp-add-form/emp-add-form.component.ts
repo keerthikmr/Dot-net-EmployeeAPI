@@ -35,7 +35,9 @@ export class EmpAddFormComponent implements OnInit {
       last_name: ['', Validators.required],
       gender: ['', Validators.required],
       title: ['', Validators.required],
-      hired_date: ['', Validators.required]
+      hired_date: ['', Validators.required],
+      salary_modifier: ['', Validators.required],
+      sal_operation: ['', Validators.required]
     });
     
     this.http.get('http://localhost:8000' + '/get_all_titles').subscribe(data => {
@@ -69,6 +71,9 @@ export class EmpAddFormComponent implements OnInit {
       formData.append('title_id', form.value.title);
       formData.append('birth_date', this.formattedDate(form.value.birth_date));
       formData.append('hired_date', this.formattedDate(form.value.hired_date));
+      formData.append('salary_modifier', form.value.salary_modifier);
+      formData.append('base_salary', this.titles[form.value.title - 1].base_salary);
+      formData.append('sal_operation', form.value.sal_operation);
 
       this.http.post('http://localhost:8000/add_employee', formData).subscribe((response) => {
           console.log(response);
