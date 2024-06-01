@@ -28,6 +28,7 @@ export class TitleAddComponent {
     this.userForm = this.fb.group({
       dept_no: ['', Validators.required],
       title_name: ['', Validators.required],
+      base_salary: ['', Validators.required]
     });
   }
 
@@ -46,6 +47,7 @@ export class TitleAddComponent {
       
       formData.append('title_name', form.value.title_name);
       formData.append('dept_no', form.value.dept_no);
+      formData.append('base_salary', form.value.base_salary);
 
       this.http.post('http://localhost:8000/add_title', formData).subscribe((response) => {
           console.log(response);

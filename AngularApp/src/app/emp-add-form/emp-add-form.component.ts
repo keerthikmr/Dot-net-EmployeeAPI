@@ -60,7 +60,7 @@ export class EmpAddFormComponent implements OnInit {
       formData.append('first_name', form.value.first_name);
       formData.append('last_name', form.value.last_name);
       formData.append('gender', form.value.gender);
-      formData.append('title', form.value.title);
+      formData.append('title_id', form.value.title);
       formData.append('birth_date', this.formattedDate(form.value.birth_date));
       formData.append('hired_date', this.formattedDate(form.value.hired_date));
 
