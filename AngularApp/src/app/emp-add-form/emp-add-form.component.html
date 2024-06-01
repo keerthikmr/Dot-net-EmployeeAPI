@@ -39,9 +39,18 @@
             Title:
         </span>
         <mat-form-field class="form-field">
-        <mat-select formControlName="title" placeholder="Title">
+        <mat-select formControlName="title" placeholder="Title" (selectionChange)="getBaseSalary()">
             <mat-option *ngFor="let title of titles" value={{title.title_id}}>{{title.title_name}}</mat-option>
         </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="field-div">
+        <span class="field-title" id="base_salary_display">
+            Base Salary:
+        </span>
+        <mat-form-field class="form-field">
+        <input matInput formControlName="last_name" placeholder="+/- Base salary">
         </mat-form-field>
     </div>
 

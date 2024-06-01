@@ -53,6 +53,12 @@ export class EmpAddFormComponent implements OnInit {
     return result;
   }
 
+  getBaseSalary() {
+      // Get base salary of title selected on selection and add it to field title
+      const base_sal = document.getElementById('base_salary_display')!;
+      base_sal.innerHTML = `Base Salary - ${this.titles[this.userForm.value.title - 1 ].base_salary}:`;
+  }
+
   onSubmit(form: FormGroup ) {
     console.log(form)
     if (form.valid) {
