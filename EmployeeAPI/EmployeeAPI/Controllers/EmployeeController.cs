@@ -217,6 +217,38 @@ namespace EmployeeAPI.Controllers
             return new JsonResult("Added successfully");
         }
 
+
+        [HttpPost("delete_dept/")]
+        public async Task<IActionResult> DeleteDept()
+        {
+            using (StreamReader Preader = new StreamReader(Request.Body, Encoding.UTF8))
+            {
+                string content = await Preader.ReadToEndAsync();
+                int dept_no = int.Parse(content);
+
+
+                string query = "DELETE FROM dept WHERE dept_no=@dept_no";
+                DataTable table = new DataTable();
+
+                string dataSource = _configuration.GetConnectionString("employee");
+                SqlDataReader reader;
+
+                using (SqlConnection connection = new SqlConnection(dataSource))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@dept_no", dept_no);
+                        reader = command.ExecuteReader();
+                        table.Load(reader);
+                    }
+                }
+            }
+
+            return new JsonResult("Department deleted Successfully");
+        }
+
         [HttpGet("get_all_titles")]
 
         public JsonResult get_all_titles()

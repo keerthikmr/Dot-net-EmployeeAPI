@@ -1,1 +1,17 @@
-<p>department-add works!</p>
+<div class="dept-heading">
+    Add a department
+</div>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" class="add-dept-form">
+
+    <div class="field-div">
+        <span class="field-title">
+            Department Name:
+        </span>
+        <mat-form-field class="form-field">
+        <input matInput formControlName="dept_name" placeholder="Department Name">
+        </mat-form-field>
+    </div>
+
+    <button mat-raised-button class="dept-submit-btn" color="accent" type="submit" color="primary" >Submit</button>
+  </form>

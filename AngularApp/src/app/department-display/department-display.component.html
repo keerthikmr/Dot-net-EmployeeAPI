@@ -1,1 +1,37 @@
-<p>department-display works!</p>
+<div class="dept-heading">
+    <div>
+        Departments
+    </div>
+    <div class="add-dept-btn">
+        <button mat-raised-button color="primary" (click)="goToPage('/departments/add')">Add Departments</button>
+    </div>
+</div>
+
+<div class="dept-container"> 
+    <table class="dept-table">
+        <thead>
+            <tr>
+                <th>Department ID</th>
+                <th>Department Name</th>
+                <th>Details</th>
+                <th>Delete</th>                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dept of departments">
+                <td>{{dept.dept_no}}</td>
+                <td>{{dept.dept_name}}</td>
+                <td>
+                    <button mat-icon-button color="primary" (click)="openDetail(dept.dept_no)">
+                        <mat-icon>info</mat-icon>
+                    </button>
+                </td>
+                <td>
+                    <button mat-icon-button color="primary" (click)="openDelete(dept.dept_no)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

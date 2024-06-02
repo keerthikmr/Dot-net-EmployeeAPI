@@ -33,9 +33,12 @@ export class ConfirmDeleteComponent {
     console.log(this.type);
     if (this.type == 'employee'){
       suffix = '/delete_employee/';
-    } else {
+    } else if (this.type == 'title'){
       suffix = '/delete_title/';
+    } else if (this.type == 'department'){
+      suffix = '/delete_dept/';
     }
+    
     this.http.post(this.API_URL + suffix, this.id).subscribe(data => {
       console.log(data);
       this.redirectTo(this.type + 's');
