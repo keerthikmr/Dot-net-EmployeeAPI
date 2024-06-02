@@ -16,17 +16,29 @@ import { PopupService } from '../popup/popup.service';
 export class TitleDisplayComponent {
 
   titles: any = [];
+  depts: any = [];
 
   constructor (private router: Router, private http: HttpClient, private popup: PopupService) {}
   
   ngOnInit(){
     this.getTitles();
+    this.getDepts();
   }
   
   getTitles() {
     this.http.get('http://localhost:8000' + '/get_all_titles').subscribe(data => {
       this.titles = data;
     });
+  }
+
+  getDepts() {
+    this.http.get('http://localhost:8000' + '/get_all_dept').subscribe(data => {
+      this.depts = data;
+    });
+  }
+
+  getDeptName(dept_no: number) {
+    return this.depts[dept_no - 1].dept_name;
   }
 
   goToPage(url : string) {

@@ -23,7 +23,7 @@
                 <td>{{title.title_id}}</td>
                 <td>{{title.title_name}}</td>
                 <td>{{title.base_salary}}</td>
-                <td>{{title.dept_no}}</td>
+                <td>{{getDeptName(title.dept_no)}}</td>
                 <td>
                     <button mat-icon-button color="primary" (click)="openDelete(title.title_id)">
                         <mat-icon>delete</mat-icon>
