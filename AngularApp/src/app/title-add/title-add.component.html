@@ -25,10 +25,12 @@
 
     <div class="field-div">
         <span class="field-title">
-            Department ID:
+            Department:
         </span>
         <mat-form-field class="form-field">
-        <input matInput formControlName="dept_no" placeholder="Department ID">
+        <mat-select formControlName="dept_no" placeholder="Department">
+            <mat-option *ngFor="let dept of depts" value={{dept.dept_no}}>{{dept.dept_name}}</mat-option>
+        </mat-select>
         </mat-form-field>
     </div>
 

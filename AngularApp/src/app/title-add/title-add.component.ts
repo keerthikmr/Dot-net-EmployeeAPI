@@ -9,17 +9,21 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter } from '@angular/material/core';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-title-add',
   standalone: true,
-  imports: [MatFormFieldModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [MatFormFieldModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, NgFor],
   templateUrl: './title-add.component.html',
   styleUrl: './title-add.component.css'
 })
 export class TitleAddComponent {
   userForm: FormGroup = new FormGroup({});
   
+  depts: any = [];
+
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router,  private dateAdapter: DateAdapter<Date>){
     this.dateAdapter.setLocale('en-GB');
   }
@@ -29,6 +33,13 @@ export class TitleAddComponent {
       dept_no: ['', Validators.required],
       title_name: ['', Validators.required],
       base_salary: ['', Validators.required]
+    });
+    this.getDepts();
+  }
+
+  getDepts() {
+    this.http.get('http://localhost:8000' + '/get_all_dept').subscribe(data => {
+      this.depts = data;
     });
   }
 
