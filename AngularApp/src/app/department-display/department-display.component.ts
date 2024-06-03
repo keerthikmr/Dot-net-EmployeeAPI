@@ -16,6 +16,7 @@ import { PopupService } from '../popup/popup.service';
 export class DepartmentDisplayComponent {
 
   departments: any = [];
+  dept_titles: any = [];
 
   constructor (private router: Router, private http: HttpClient, private popup: PopupService) {}
   
@@ -37,7 +38,7 @@ export class DepartmentDisplayComponent {
     this.popup.openDeleteConfPopup(title_id, 'department');
   }
 
-  openDetail(dept_no: number) {
-
+  openDetail(dept_no: number, dept_name: string) {
+    this.popup.openDeptDetail(dept_no, dept_name);
   }
 }
