@@ -21,7 +21,7 @@ namespace EmployeeAPI.Controllers
 
         public JsonResult get_all_employees()
         {
-            string query = "select emp_no, first_name, last_name, gender, birth_date, hired_date, title_name from employee join titles on employee.title_id = titles.title_id;";
+            string query = "select emp_no, first_name, last_name, gender, birth_date, hired_date, title_name from employee left join titles on employee.title_id = titles.title_id;";
             DataTable table = new DataTable();
 
             string dataSource = _configuration.GetConnectionString("employee");
@@ -43,7 +43,7 @@ namespace EmployeeAPI.Controllers
         [HttpGet("get_employee/{emp_no}")]
         public JsonResult get_employee(int emp_no)
         {
-            string query = "select * from employee join titles on employee.title_id=titles.title_id where emp_no = @emp_no;";
+            string query = "select * from employee left join titles on employee.title_id=titles.title_id where emp_no = @emp_no;";
             DataTable table = new DataTable();
 
             string dataSource = _configuration.GetConnectionString("employee");
