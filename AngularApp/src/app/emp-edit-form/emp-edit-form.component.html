@@ -42,7 +42,27 @@
         </mat-select>
         </mat-form-field>
     </div>
-    
+
+    <div class="field-div">
+        <span class="field-title">
+            Title:
+        </span>
+        <mat-form-field class="form-field">
+        <mat-select formControlName="title_id" placeholder="Title">
+            <mat-option *ngFor="let title of titles" value={{title.title_id}}>{{title.title_name}}</mat-option>
+        </mat-select>
+        </mat-form-field>
+    </div>
+        
+    <div class="field-div">
+        <span class="field-title">
+            Salary:
+        </span>
+        <mat-form-field class="form-field">
+        <input matInput formControlName="salary" placeholder="Salary" value={{employee.salary}}>
+        </mat-form-field>
+    </div>
+
     <div class="field-div">
         <span class="field-title">
             Birth Date:

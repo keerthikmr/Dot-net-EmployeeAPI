@@ -23,6 +23,7 @@ import { Router } from '@angular/router';
 export class EmpEditFormComponent implements OnInit{
   API_URL = 'http://localhost:8000';
   employee: any = {};
+  titles: any = [];
 
   userForm: FormGroup = new FormGroup({});
   
@@ -41,6 +42,12 @@ export class EmpEditFormComponent implements OnInit{
       last_name: ['', Validators.required],
       gender: ['', Validators.required],
       hired_date: ['', Validators.required],
+      salary: ['', Validators.required],
+      title_id: ['', Validators.required]
+    });
+
+    this.http.get('http://localhost:8000' + '/get_all_titles').subscribe(data => {
+      this.titles = data;
     });
 
     this.http.get(this.API_URL + `/get_employee/${this.id}`).subscribe(data => {
@@ -56,6 +63,8 @@ export class EmpEditFormComponent implements OnInit{
       this.userForm.controls['last_name'].setValue(this.employee.last_name)
       this.userForm.controls['birth_date'].setValue(this.employee.birth_date)
       this.userForm.controls['hired_date'].setValue(this.employee.hired_date)
+      this.userForm.controls['title_id'].setValue(this.employee.title_id) // preset doesn't work. *Fix*
+      this.userForm.controls['salary'].setValue(this.employee.salary)
     });
     
   }
@@ -89,6 +98,8 @@ export class EmpEditFormComponent implements OnInit{
       formData.append('gender', form.value.gender);
       formData.append('birth_date', this.formattedDate(form.value.birth_date));
       formData.append('hired_date', this.formattedDate(form.value.hired_date));
+      formData.append('title_id', form.value.title_id);
+      formData.append('salary', form.value.salary);
 
       this.http.post('http://localhost:8000/edit_employee', formData).subscribe((response) => {
           console.log(response);
