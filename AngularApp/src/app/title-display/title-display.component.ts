@@ -38,7 +38,12 @@ export class TitleDisplayComponent {
   }
 
   getDeptName(dept_no: number) { // Change logic
-    return this.depts[dept_no - 1].dept_name;
+    let i: number;
+    for (i=0; i< this.depts.length; i++){
+      if (this.depts[i].dept_no == dept_no) {
+        return this.depts[i].dept_name;
+      }
+    }
   }
 
   goToPage(url : string) {
