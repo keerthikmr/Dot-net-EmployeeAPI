@@ -107,9 +107,9 @@ namespace EmployeeAPI.Controllers
         }
 
         [HttpPost("edit_employee")]
-        public JsonResult edit_employee([FromForm] int emp_no, [FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date)
+        public JsonResult edit_employee([FromForm] int emp_no, [FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date, [FromForm] string title_id, [FromForm] int salary)
         {
-            string query = "UPDATE employee SET first_name=@first_name, last_name=@last_name, gender=@gender, birth_date=@birth_date, hired_date=@hired_date WHERE emp_no=@emp_no";
+            string query = "UPDATE employee SET first_name=@first_name, last_name=@last_name, gender=@gender, birth_date=@birth_date, hired_date=@hired_date, title_id=@title_id, salary=@salary WHERE emp_no=@emp_no";
             DataTable table = new DataTable();
 
             string SqlDatasource = _configuration.GetConnectionString("employee");
@@ -128,6 +128,8 @@ namespace EmployeeAPI.Controllers
                     myCommand.Parameters.AddWithValue("@gender", gender);
                     myCommand.Parameters.AddWithValue("@birth_date", birth_date);
                     myCommand.Parameters.AddWithValue("@hired_date", hired_date);
+                    myCommand.Parameters.AddWithValue("@salary", salary);
+                    myCommand.Parameters.AddWithValue("@title_id", title_id);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -135,6 +137,35 @@ namespace EmployeeAPI.Controllers
             }
             return new JsonResult("Edited successfully");
         }
+
+        [HttpPost("edit_title")]
+        public JsonResult edit_title([FromForm] int title_id, [FromForm] string title_name, [FromForm] int base_salary, [FromForm] int dept_no)
+        {
+            string query = "UPDATE titles SET title_name=@title_name, base_salary=@base_salary, dept_no=@dept_no WHERE title_id=@title_id";
+            DataTable table = new DataTable();
+
+            string SqlDatasource = _configuration.GetConnectionString("employee");
+            SqlDataReader myReader;
+
+            using (SqlConnection mycon = new SqlConnection(SqlDatasource))
+            {
+
+                mycon.Open();
+
+                using (SqlCommand myCommand = new SqlCommand(query, mycon))
+                {
+                    myCommand.Parameters.AddWithValue("@title_id", title_id);
+                    myCommand.Parameters.AddWithValue("@title_name", title_name);
+                    myCommand.Parameters.AddWithValue("@base_salary", base_salary);
+                    myCommand.Parameters.AddWithValue("@dept_no", dept_no);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                }
+            }
+            return new JsonResult("Title edited successfully");
+        }
+
 
         [HttpPost("delete_employee/")]
         public async Task<IActionResult> DeleteEmployee()
