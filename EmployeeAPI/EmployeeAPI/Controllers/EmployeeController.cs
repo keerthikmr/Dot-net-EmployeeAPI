@@ -222,6 +222,29 @@ namespace EmployeeAPI.Controllers
             return new JsonResult(table);
         }
 
+        [HttpGet("get_dept_titles/{dept_no}")]
+        public JsonResult get_dept_titles(int dept_no)
+        {
+            string query = "select * from titles where dept_no=@dept_no";
+            DataTable table = new DataTable();
+
+            string dataSource = _configuration.GetConnectionString("employee");
+            SqlDataReader reader;
+
+            using (SqlConnection connection = new SqlConnection(dataSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@dept_no", dept_no);
+                    reader = command.ExecuteReader();
+                    table.Load(reader);
+                }
+            }
+            return new JsonResult(table);
+        }
+
 
         [HttpPost("add_dept")]
         public JsonResult add_dept([FromForm] string dept)
