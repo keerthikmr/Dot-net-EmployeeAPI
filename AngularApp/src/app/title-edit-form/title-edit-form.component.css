@@ -1,14 +1,14 @@
-.add-emp-form{
+.add-title-form{
     margin: 1rem 10rem;
     display: flex;
     flex-direction: column;
 }
 
-.emp-submit-btn {
+.title-submit-btn {
   padding: 1.5rem;
 }
 
-.emp-delete-btn {
+.title-delete-btn {
     color: white;
     background-color:red;
     padding: 1.5rem;
@@ -29,7 +29,7 @@
     width: 40%;
 }
 
-.employee-heading {
+.title-heading {
     font-size: 20px;
     font-weight: bold;
     background-color: rgb(165, 174, 181);

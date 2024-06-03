@@ -37,7 +37,7 @@ export class TitleDisplayComponent {
     });
   }
 
-  getDeptName(dept_no: number) {
+  getDeptName(dept_no: number) { // Change logic
     return this.depts[dept_no - 1].dept_name;
   }
 
@@ -47,5 +47,9 @@ export class TitleDisplayComponent {
 
   openDelete(title_id: number){
     this.popup.openDeleteConfPopup(title_id, 'title');
+  }
+
+  openEdit(title_id: number){
+    this.popup.openTitleEditPopup(title_id);
   }
 }

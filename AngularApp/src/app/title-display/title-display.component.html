@@ -15,6 +15,7 @@
                 <th>Title Name</th>
                 <th>Base salary</th>
                 <th>Department</th>
+                <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -24,6 +25,11 @@
                 <td>{{title.title_name}}</td>
                 <td>{{title.base_salary}}</td>
                 <td>{{getDeptName(title.dept_no)}}</td>
+                <td>
+                    <button mat-icon-button color="primary" (click)="openEdit(title.title_id)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>              
                 <td>
                     <button mat-icon-button color="primary" (click)="openDelete(title.title_id)">
                         <mat-icon>delete</mat-icon>

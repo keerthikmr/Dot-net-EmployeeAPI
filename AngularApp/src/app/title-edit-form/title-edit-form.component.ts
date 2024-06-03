@@ -8,6 +8,8 @@ import { NgFor } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClient } from '@angular/common/http';
 import { Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { PopupService } from '../popup/popup.service';
 
 @Component({
   selector: 'app-title-edit-form',
@@ -20,7 +22,7 @@ export class TitleEditFormComponent {
   title: any = {};
   depts: any = [];
 
-  constructor(private fb: FormBuilder, private http: HttpClient){}
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private popup: PopupService){}
 
   userForm: FormGroup = new FormGroup({});
 
@@ -29,12 +31,10 @@ export class TitleEditFormComponent {
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      birth_date: ['', Validators.required],
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      gender: ['', Validators.required],
-      title: ['', Validators.required],
-      hired_date: ['', Validators.required]
+      title_id: ['', Validators.required],
+      title_name: ['', Validators.required],
+      base_salary: ['', Validators.required],
+      dept_no: ['', Validators.required],
     });
     
     this.http.get('http://localhost:8000' + '/get_all_dept').subscribe(data => {
@@ -56,11 +56,28 @@ export class TitleEditFormComponent {
 
   }
 
-  titleDelete(title_id: number){
-
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([uri])});
   }
 
   onSubmit(form: FormGroup){
+    console.log(form);
+    if (form.valid) {
+      const formData = new FormData();
 
+      formData.append('title_id', form.value.title_id);
+      formData.append('title_name', form.value.title_name);
+      formData.append('base_salary', form.value.base_salary);
+      formData.append('dept_no', form.value.dept_no);
+      
+      this.http.post('http://localhost:8000/edit_title', formData).subscribe((response) => {
+          console.log(response);
+          this.popup.closePopup();
+          this.redirectTo('/titles');
+        }, (error) => {
+          console.error(error);
+        });
+    }
   }
 }

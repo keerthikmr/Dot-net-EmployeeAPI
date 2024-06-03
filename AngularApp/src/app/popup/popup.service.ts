@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EmpDetailComponent } from '../emp-detail/emp-detail.component';
 import { EmpEditFormComponent } from '../emp-edit-form/emp-edit-form.component';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
+import { TitleEditFormComponent } from '../title-edit-form/title-edit-form.component';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,15 @@ export class PopupService {
   openEditPopup(id: number) {
     this.closePopup();
     const dialogRef = this.dialog.open(EmpEditFormComponent, {
+      data: { id: id }
+    });
+
+    dialogRef.componentInstance.id = id;
+  }
+
+  openTitleEditPopup(id: number) {
+    this.closePopup();
+    const dialogRef = this.dialog.open(TitleEditFormComponent, {
       data: { id: id }
     });
 
