@@ -11,7 +11,6 @@ export const routes: Routes = [
     { path: '', component: EmpDisplayComponent },
     { path: 'employees', component: EmpDisplayComponent },
     { path: 'employees/add', component: EmpAddFormComponent },
-    { path: 'salaries', component: SalaryDisplayComponent },
     { path: 'departments', component: DepartmentDisplayComponent },
     { path: 'departments/add', component: DepartmentAddComponent },
     { path: 'titles/add', component: TitleAddComponent },
