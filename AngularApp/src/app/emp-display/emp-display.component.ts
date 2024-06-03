@@ -8,6 +8,7 @@ import { PopupService } from '../popup/popup.service';
 import { EmpDetailComponent } from '../emp-detail/emp-detail.component';
 import { Injectable } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
+import { Sort, MatSortModule } from '@angular/material/sort';
 
 @Injectable({
   providedIn: 'root'
@@ -15,20 +16,28 @@ import {MatIconModule} from '@angular/material/icon';
 @Component({
   selector: 'app-emp-display',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule],
+  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule],
   templateUrl: './emp-display.component.html',
-  styleUrl: './emp-display.component.css'
+  styleUrl: './emp-display.component.css',
+  host: {ngSkipHydration: 'true'},
 })
 export class EmpDisplayComponent {
   API_URL = 'http://localhost:8000';
 
   employees: any = [];
   new_employee: any = {};
+  sortedData: any;
 
-  constructor(private http: HttpClient, private router: Router, private popupService: PopupService) {}
+  constructor(private http: HttpClient, private router: Router, private popupService: PopupService) {
+    this.sortedData = this.employees.slice();
+  }
 
   ngOnInit() {
     this.getEmployees();
+  }
+
+  ngAfterViewInit() {
+    this.sortData({active: 'emp_id', direction: 'asc'});
   }
 
   getEmployees() {
@@ -59,4 +68,35 @@ export class EmpDisplayComponent {
   deleteEmp(id: number){
     this.popupService.openDeleteConfPopup(id, 'employee');
   }
+
+  sortData(sort: Sort) {
+    const data = this.employees.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a: any, b: any) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        
+        case 'emp_id':
+          return compare(a.emp_no, b.emp_no, isAsc);
+        case 'age':
+          return compare(a.birth_date, b.birth_date, isAsc);
+        case 'gender':
+            return compare(a.gender, b.gender, isAsc);
+        case 'salary':
+          return compare(a.salary, b.salary, isAsc);
+        case 'name':
+          return compare(a.first_name, b.first_name, isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+
 }
+  function compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }

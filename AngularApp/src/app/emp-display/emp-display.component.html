@@ -8,25 +8,24 @@
 </div>
 
 <div class="emp-container"> 
-    <table class="emp-table">
-        <thead>
+    <table class="emp-table" matSort (matSortChange)="sortData($event)" matSortActive="emp_id" matSortDirection="asc">
             <tr>
-                <th>Employee ID</th>
-                <th>Full Name</th>
+                <th mat-sort-header="emp_id">Employee ID</th>
+                <th mat-sort-header="name">Full Name</th>
                 <th>Position</th>
-                <th>Gender</th>
-                <th>Age</th>
+                <th mat-sort-header="gender">Gender</th>
+                <th mat-sort-header="age">Age</th>
                 <th>Details</th>
                 <th>Delete</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let emp of employees">
-                <td>{{emp.emp_no}}</td>
-                <td>{{ emp.first_name + ' ' + emp.last_name}} </td>
-                <td>{{emp.title_name}}</td>
+            
+            @for (emp of sortedData; track emp) {
+            <tr>
+                <td>{{ emp.emp_no }}</td>
+                <td>{{ emp.first_name + ' ' + emp.last_name }} </td>
+                <td>{{ emp.title_name }}</td>
                 <td>{{ emp.gender }}</td>
-                <td>{{getAge(emp.birth_date)}}</td>
+                <td>{{ getAge(emp.birth_date) }}</td>
                 <td>
                     <button mat-icon-button color="primary" (click)="openDetail(emp.emp_no)">
                         <mat-icon>info</mat-icon>
@@ -38,6 +37,7 @@
                     </button>
                 </td>
             </tr>
-        </tbody>
+            }
+
     </table>
 </div>

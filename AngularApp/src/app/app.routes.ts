@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { EmpDisplayComponent } from './emp-display/emp-display.component';
 import { EmpAddFormComponent } from './emp-add-form/emp-add-form.component';
-import { SalaryDisplayComponent } from './salary-display/salary-display.component';
 import { DepartmentDisplayComponent } from './department-display/department-display.component';
 import { DepartmentAddComponent } from './department-add/department-add.component';
 import { TitleAddComponent } from './title-add/title-add.component';
