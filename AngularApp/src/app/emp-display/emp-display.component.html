@@ -5,45 +5,45 @@
     <div class="add-emp-btn">
         <button mat-raised-button color="primary" (click)="goToPage('/employees/add')">Add Employee</button>
     </div>
-    <div class="filter-emp-btn">
-        <!-- <button mat-raised-button color="primary" (click)="performFilter()">Filter</button> -->
-    </div>
+</div>
+<div class="filter-emp-btn">
+    <button mat-raised-button color="primary" (click)="performFilter()">Filter</button>
 </div>
 
 <div class="emp-container"> 
     <mat-table #table [dataSource]="dataSource" class="emp-table" matSort >
             
-        <ng-container matColumnDef="emp_no">
+        <ng-container matColumnDef="emp_no" class="mat-column">
             <mat-header-cell *matHeaderCellDef mat-sort-header="emp_no"> Emp. Number </mat-header-cell>
             <mat-cell *matCellDef="let emp"> {{emp.emp_no}} </mat-cell>
         </ng-container>
-        
-        <ng-container matColumnDef="full_name">
+
+        <ng-container matColumnDef="full_name" class="mat-column">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Full  name </mat-header-cell>
             <mat-cell *matCellDef="let emp"> {{emp.first_name + ' ' + emp.last_name}} </mat-cell>
         </ng-container>
         
-        <ng-container matColumnDef="gender">
+        <ng-container matColumnDef="gender" class="mat-column">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
             <mat-cell *matCellDef="let emp"> {{emp.gender}} </mat-cell>
         </ng-container>
         
-        <ng-container matColumnDef="age">
+        <ng-container matColumnDef="age" class="mat-column">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Age </mat-header-cell>
             <mat-cell *matCellDef="let emp"> {{getAge(emp.birth_date)}} </mat-cell>
         </ng-container>
         
-        <ng-container matColumnDef="position">
+        <ng-container matColumnDef="position" class="mat-column">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Position</mat-header-cell>
             <mat-cell *matCellDef="let emp"> {{emp.title_name}} </mat-cell>
         </ng-container>
         
-        <ng-container matColumnDef="salary">
+        <ng-container matColumnDef="salary" class="mat-column">
             <mat-header-cell *matHeaderCellDef> Salary </mat-header-cell>
             <mat-cell *matCellDef="let emp"> {{emp.salary}} </mat-cell>
         </ng-container>
         
-        <ng-container matColumnDef="details">
+        <ng-container matColumnDef="details" class="mat-column">
             <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
             <mat-cell *matCellDef="let emp">
                 <button mat-icon-button color="primary" (click)="openDetail(emp.emp_no)">
@@ -52,7 +52,7 @@
             </mat-cell>
         </ng-container>
         
-        <ng-container matColumnDef="delete">
+        <ng-container matColumnDef="delete" class="mat-column">
             <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
             <mat-cell *matCellDef="let emp">
                 <button mat-icon-button color="primary" (click)="deleteEmp(emp.emp_no)">

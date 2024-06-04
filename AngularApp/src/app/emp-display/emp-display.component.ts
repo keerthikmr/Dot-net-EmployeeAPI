@@ -76,4 +76,8 @@ export class EmpDisplayComponent {
   deleteEmp(id: number){
     this.popupService.openDeleteConfPopup(id, 'employee');
   }
+
+  performFilter(){
+    
+  }
 }
