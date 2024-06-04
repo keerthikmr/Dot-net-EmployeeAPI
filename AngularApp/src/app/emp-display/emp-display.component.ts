@@ -24,7 +24,6 @@ import { MatSort } from '@angular/material/sort';
   imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule, MatTableModule],
   templateUrl: './emp-display.component.html',
   styleUrl: './emp-display.component.css',
-  host: {ngSkipHydration: 'true'},
 })
 export class EmpDisplayComponent {
   API_URL = 'http://localhost:8000';
@@ -42,12 +41,25 @@ export class EmpDisplayComponent {
     this.sortedData = this.employees.slice();
   }
 
-  ngOnInit() {
-    this.http.get(this.API_URL + '/get_all_employees').subscribe(data => {
-      this.employees = data;
-      
-      this.dataSource.data = this.employees;
+  prepareData() {
+    this.employees.forEach((employee: any) => {
+      employee.age = this.getAge(employee.birth_date);
+      employee.full_name = employee.first_name + ' ' + employee.last_name;
     });
+    console.log(this.employees)
+    this.setData();
+  }
+
+  setData() {
+    this.dataSource.data = this.employees;
+    this.dataSource.sort = this.sort;
+  }
+
+  ngOnInit() {
+    this.http.get(this.API_URL + '/get_all_employees').subscribe(async data => {
+      this.employees = data;
+    });
+    this.prepareData();
   }
 
   ngAfterViewInit() {
@@ -78,6 +90,6 @@ export class EmpDisplayComponent {
   }
 
   performFilter(){
-    
+
   }
 }

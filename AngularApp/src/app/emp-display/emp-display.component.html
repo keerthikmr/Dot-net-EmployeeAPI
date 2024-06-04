@@ -34,12 +34,12 @@
         </ng-container>
         
         <ng-container matColumnDef="position" class="mat-column">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Position</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Position</mat-header-cell>
             <mat-cell *matCellDef="let emp"> {{emp.title_name}} </mat-cell>
         </ng-container>
         
         <ng-container matColumnDef="salary" class="mat-column">
-            <mat-header-cell *matHeaderCellDef> Salary </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Salary </mat-header-cell>
             <mat-cell *matCellDef="let emp"> {{emp.salary}} </mat-cell>
         </ng-container>
         
