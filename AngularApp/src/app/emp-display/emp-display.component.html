@@ -5,39 +5,63 @@
     <div class="add-emp-btn">
         <button mat-raised-button color="primary" (click)="goToPage('/employees/add')">Add Employee</button>
     </div>
+    <div class="filter-emp-btn">
+        <button mat-raised-button color="primary" (click)="performFilter()">Filter</button>
+    </div>
 </div>
 
 <div class="emp-container"> 
-    <table class="emp-table" matSort (matSortChange)="sortData($event)" matSortActive="emp_id" matSortDirection="asc">
-            <tr>
-                <th mat-sort-header="emp_id">Employee ID</th>
-                <th mat-sort-header="name">Full Name</th>
-                <th>Position</th>
-                <th mat-sort-header="gender">Gender</th>
-                <th mat-sort-header="age">Age</th>
-                <th>Details</th>
-                <th>Delete</th>
-            </tr>
+    <mat-table #table [dataSource]="dataSource" class="emp-table" matSort >
             
-            @for (emp of sortedData; track emp) {
-            <tr>
-                <td>{{ emp.emp_no }}</td>
-                <td>{{ emp.first_name + ' ' + emp.last_name }} </td>
-                <td>{{ emp.title_name }}</td>
-                <td>{{ emp.gender }}</td>
-                <td>{{ getAge(emp.birth_date) }}</td>
-                <td>
-                    <button mat-icon-button color="primary" (click)="openDetail(emp.emp_no)">
-                        <mat-icon>info</mat-icon>
-                    </button>
-                </td>
-                <td>
-                    <button mat-icon-button color="primary" (click)="deleteEmp(emp.emp_no)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </td>
-            </tr>
-            }
+        <ng-container matColumnDef="emp_no">
+            <mat-header-cell *matHeaderCellDef mat-sort-header="emp_no"> Emp. Number </mat-header-cell>
+            <mat-cell *matCellDef="let emp"> {{emp.emp_no}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="full_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Full  name </mat-header-cell>
+            <mat-cell *matCellDef="let emp"> {{emp.first_name + ' ' + emp.last_name}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="gender">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+            <mat-cell *matCellDef="let emp"> {{emp.gender}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="age">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Age </mat-header-cell>
+            <mat-cell *matCellDef="let emp"> {{getAge(emp.birth_date)}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Position</mat-header-cell>
+            <mat-cell *matCellDef="let emp"> {{emp.title_name}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="salary">
+            <mat-header-cell *matHeaderCellDef> Salary </mat-header-cell>
+            <mat-cell *matCellDef="let emp"> {{emp.salary}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="details">
+            <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
+            <mat-cell *matCellDef="let emp">
+                <button mat-icon-button color="primary" (click)="openDetail(emp.emp_no)">
+                    <mat-icon>info</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+            <mat-cell *matCellDef="let emp">
+                <button mat-icon-button color="primary" (click)="deleteEmp(emp.emp_no)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
 
-    </table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
 </div>

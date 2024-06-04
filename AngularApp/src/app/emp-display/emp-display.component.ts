@@ -9,6 +9,11 @@ import { EmpDetailComponent } from '../emp-detail/emp-detail.component';
 import { Injectable } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import { Sort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ViewChild } from '@angular/core';
+import { MatTable } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +21,7 @@ import { Sort, MatSortModule } from '@angular/material/sort';
 @Component({
   selector: 'app-emp-display',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule],
+  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule, MatTableModule],
   templateUrl: './emp-display.component.html',
   styleUrl: './emp-display.component.css',
   host: {ngSkipHydration: 'true'},
@@ -24,27 +29,36 @@ import { Sort, MatSortModule } from '@angular/material/sort';
 export class EmpDisplayComponent {
   API_URL = 'http://localhost:8000';
 
+  @ViewChild(MatSort) sort!: MatSort;
+
   employees: any = [];
   new_employee: any = {};
   sortedData: any;
+
+  displayedColumns = ['emp_no', 'full_name', 'gender', 'age', 'position', 'salary', 'details', 'delete']
+  dataSource = new MatTableDataSource(this.employees);
 
   constructor(private http: HttpClient, private router: Router, private popupService: PopupService) {
     this.sortedData = this.employees.slice();
   }
 
+  refreshTable() {
+    this.dataSource.data = this.employees;
+  }
+
   ngOnInit() {
-    this.getEmployees();
+    this.http.get(this.API_URL + '/get_all_employees').subscribe(data => {
+      this.employees = data;
+      
+      this.dataSource.data = this.employees;
+      // this.dataSource.sort = this.sort;
+    });
   }
 
   ngAfterViewInit() {
-    this.sortData({active: 'emp_id', direction: 'asc'});
+    this.dataSource.sort = this.sort;
   }
 
-  getEmployees() {
-    this.http.get(this.API_URL + '/get_all_employees').subscribe(data => {
-      this.employees = data;
-    });
-  }
   
   getAge(birthDate: string) {
     const today = new Date();
@@ -94,6 +108,10 @@ export class EmpDisplayComponent {
           return 0;
       }
     });
+  }
+
+  performFilter() {
+    this.employees = {};
   }
 
 }

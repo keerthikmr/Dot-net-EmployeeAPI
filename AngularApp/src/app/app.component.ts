@@ -15,12 +15,12 @@ import { Router } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  constructor(private router: Router, private empDisplayComp: EmpDisplayComponent) {
-    this.router.events.subscribe((e) => {
-      if (e instanceof EmpDisplayComponent) {
-          console.log("navigated")
-          empDisplayComp.ngOnInit();
-      }
-    });
-  }
+  // constructor(private router: Router, private empDisplayComp: EmpDisplayComponent) {
+  //   this.router.events.subscribe((e) => {
+  //     if (e instanceof EmpDisplayComponent) {
+  //         console.log("navigated")
+  //         empDisplayComp.ngOnInit();
+  //     }
+  //   });
+  // }
 }
