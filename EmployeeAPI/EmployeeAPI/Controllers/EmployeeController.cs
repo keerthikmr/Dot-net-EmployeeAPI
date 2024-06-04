@@ -21,7 +21,7 @@ namespace EmployeeAPI.Controllers
 
         public JsonResult get_all_employees()
         {
-            string query = "select emp_no, first_name, last_name, gender, birth_date, hired_date, title_name from employee left join titles on employee.title_id = titles.title_id;";
+            string query = "select emp_no, first_name, last_name, gender, birth_date, hired_date, title_name, salary from employee left join titles on employee.title_id = titles.title_id;";
             DataTable table = new DataTable();
 
             string dataSource = _configuration.GetConnectionString("employee");
