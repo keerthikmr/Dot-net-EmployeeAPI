@@ -175,7 +175,7 @@ export class EmpDisplayComponent {
       const colSalary = data.salary;
 
       const filterPosition = colTitle.toLocaleLowerCase().includes(position);
-      const filterGender = colGender.toLowerCase() === gender;
+      const filterGender = colGender.toLowerCase() === gender || gender === '';
       const filterAge = colAge >= parseInt(minAge) && colAge <= parseInt(maxAge);
       const filterSalary = colSalary >= parseInt(minSalary) && colSalary <= parseInt(maxSalary);
 
