@@ -23,6 +23,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginator } from '@angular/material/paginator';
 
 export interface Emp {
   age: number;
@@ -44,7 +45,7 @@ export interface Emp {
 @Component({
   selector: 'app-emp-display',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule, MatTableModule, MatInput, MatExpansionModule, MatFormField, MatSelectModule, FormsModule, FormsModule, ReactiveFormsModule, MatFormFieldModule],
+  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule, MatTableModule, MatInput, MatExpansionModule, MatFormField, MatSelectModule, FormsModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatPaginator],
   templateUrl: './emp-display.component.html',
   styleUrl: './emp-display.component.css',
 })
@@ -53,6 +54,7 @@ export class EmpDisplayComponent {
   API_URL = 'http://localhost:8000';
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   employees: any = [];
   new_employee: Emp = {age: 0, full_name: '', first_name: '', last_name: '', salary: 0, birth_date: new Date(), hired_date: new Date(), gender: '', emp_no: 0, title_name: ''};
@@ -115,6 +117,10 @@ export class EmpDisplayComponent {
 
     this.dataSource.filterPredicate = (data: unknown, filter: string) => this.getFilterPredicate()(data as Emp, filter);
   } 
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   getAge(birthDate: string) {
     const today = new Date();
