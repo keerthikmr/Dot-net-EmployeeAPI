@@ -46,7 +46,7 @@
                         Gender:
                     </span>
                     <mat-form-field class="form-field">
-                        <mat-select formControlName="gender" placeholder="Gender">
+                        <mat-select formControlName="gender" placeholder="Gender" (selectionChange)="applyFilter()">
                             <mat-option value="Male">Male</mat-option>
                             <mat-option value="Female">Female</mat-option>
                         </mat-select>
@@ -60,11 +60,11 @@
                     </span>
                     <div class="form-field">
                         <mat-form-field class="input-box">
-                            <input matInput formControlName="minAge" type="number" min="0"  max="150" placeholder="Min Age">
+                            <input matInput formControlName="min_age" type="number" min="0"  max="150" placeholder="Min Age" (keyup)="applyFilter()">
                         </mat-form-field>
 
                         <mat-form-field class="input-box">
-                            <input matInput formControlName="maxAge" type="number" min="0"  max="150" placeholder="Max Age">
+                            <input matInput formControlName="max_age" type="number" min="0"  max="150" placeholder="Max Age" (keyup)="applyFilter()">
                         </mat-form-field>
                     </div>
                 </div>
@@ -77,11 +77,11 @@
                     
                     <div class="form-field">
                         <mat-form-field class="input-box">
-                            <input matInput formControlName="minSalary" type="number" min="0" placeholder="Min Salary">
+                            <input matInput formControlName="min_salary" type="number" min="0" placeholder="Min Salary" (keyup)="applyFilter()">
                         </mat-form-field>
 
                         <mat-form-field class="input-box">
-                            <input matInput formControlName="maxSalary" type="number" min="0" placeholder="Max Salary">
+                            <input matInput formControlName="max_salary" type="number" min="0" placeholder="Max Salary" (keyup)="applyFilter()">
                         </mat-form-field>
                     </div>
                 </div>

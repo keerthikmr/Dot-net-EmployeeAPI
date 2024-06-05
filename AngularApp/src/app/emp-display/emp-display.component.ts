@@ -24,9 +24,23 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+export interface Emp {
+  age: number;
+  full_name: string;
+  gender: string;
+  title_name: string;
+  salary: number,
+  first_name: string;
+  last_name: string;
+  hired_date: Date;
+  birth_date: Date;
+  emp_no: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
 @Component({
   selector: 'app-emp-display',
   standalone: true,
@@ -34,19 +48,27 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './emp-display.component.html',
   styleUrl: './emp-display.component.css',
 })
+
 export class EmpDisplayComponent {
   API_URL = 'http://localhost:8000';
 
   @ViewChild(MatSort) sort!: MatSort;
 
   employees: any = [];
-  new_employee: any = {};
+  new_employee: Emp = {age: 0, full_name: '', first_name: '', last_name: '', salary: 0, birth_date: new Date(), hired_date: new Date(), gender: '', emp_no: 0, title_name: ''};
   sortedData: any;
 
   titles: any = [];
   depts: any = [];
 
   userForm: FormGroup = new FormGroup({});
+  position = '';
+  gender = '';
+  department = '';
+  minAge = 0;
+  maxAge = 0;
+  minSalary = 0;
+  maxSalary = 0;
 
   displayedColumns = ['emp_no', 'full_name', 'gender', 'age', 'position', 'salary', 'details', 'delete']
   dataSource = new MatTableDataSource(this.employees);
@@ -86,7 +108,12 @@ export class EmpDisplayComponent {
       this.prepareData(); 
       this.setData();
     });
-  }
+
+    this.dataSource.filterPredicate = (data: unknown, filter: string) => this.getFilterPredicate()(data as Emp, filter);
+
+    // this.dataSource.filterPredicate = (data:any, filter) => 
+    //   (data.first_name.trim().toLowerCase().indexOf(filter.trim().toLowerCase()) !== -1);
+  } 
 
   getAge(birthDate: string) {
     const today = new Date();
@@ -115,7 +142,55 @@ export class EmpDisplayComponent {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
-  performFilter() {
+  getFilterPredicate() {
+    return (data: Emp, filter: string) => {
+      const filterArray = filter.split('$');
 
+      const position = filterArray[0];
+      const gender = filterArray[1];
+      const minAge = filterArray[2];
+      const maxAge = filterArray[3];
+      const minSalary = filterArray[4];
+      const maxSalary = filterArray[5];
+
+      const matchFilter = [];
+
+      const colTitle = data.title_name;
+      const colGender = data.gender;
+      const colAge = data.age;
+      const colSalary = data.salary;
+
+      const filterPosition = colTitle.toLocaleLowerCase().includes(position);
+      const filterGender = colGender.toLowerCase().includes(gender);
+      const filterAge = colAge >= parseInt(minAge) && colAge <= parseInt(maxAge);
+      const filterSalary = colSalary >= parseInt(minSalary) && colSalary <= parseInt(maxSalary);
+
+      matchFilter.push(filterPosition);
+      matchFilter.push(filterGender);
+      matchFilter.push(filterAge);
+      matchFilter.push(filterSalary);
+
+      return matchFilter.every(Boolean);
+    };
   }
+
+  applyFilter() {
+    const position = this.userForm.get('position')!.value;
+    const gender = this.userForm.get('gender')!.value;
+    const minAge = this.userForm.get('min_age')!.value;
+    const maxAge = this.userForm.get('max_age')!.value;
+    const minSalary = this.userForm.get('min_salary')!.value;
+    const maxSalary = this.userForm.get('max_salary')!.value;
+
+    this.position = position === null  ? '' : position;
+    this.gender = gender === null ? '' : gender;
+    this.minAge = (minAge === null || minAge === '') ? 0 : minAge;
+    this.maxAge = (maxAge === null || maxAge === '') ? Number.MAX_SAFE_INTEGER : maxAge;
+    this.minSalary = (minSalary === null || minSalary === '') ? 0 : minSalary;
+    this.maxSalary = (maxSalary === null || maxSalary === '') ? Number.MAX_SAFE_INTEGER : maxSalary;
+
+    const filterValue = this.position + '$' + this.gender + '$' + this.minAge + '$' + this.maxAge + '$' + this.minSalary + '$' + this.maxSalary;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 }
