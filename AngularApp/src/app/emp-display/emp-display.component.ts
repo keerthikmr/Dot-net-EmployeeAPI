@@ -110,9 +110,6 @@ export class EmpDisplayComponent {
     });
 
     this.dataSource.filterPredicate = (data: unknown, filter: string) => this.getFilterPredicate()(data as Emp, filter);
-
-    // this.dataSource.filterPredicate = (data:any, filter) => 
-    //   (data.first_name.trim().toLowerCase().indexOf(filter.trim().toLowerCase()) !== -1);
   } 
 
   getAge(birthDate: string) {
@@ -139,6 +136,14 @@ export class EmpDisplayComponent {
   }
 
   doFilter = (value: string) => {
+    this.dataSource.filterPredicate = (data:any, filter) => 
+      (data.full_name.trim().toLowerCase().indexOf(filter.trim().toLowerCase()) !== -1) ||
+      (data.emp_no.toString().indexOf(filter.trim().toLowerCase()) !== -1) ||
+      (data.gender.trim().toLowerCase().indexOf(filter.trim().toLowerCase()) !==-1) ||
+      (data.age.toString().indexOf(filter.trim().toLowerCase()) !==-1) ||
+      (data.title_name.trim().toLowerCase().indexOf(filter.trim().toLowerCase()) !==-1) ||
+      (data.salary.toString().indexOf(filter.trim().toLowerCase()) !==-1)
+    ;
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
@@ -175,6 +180,7 @@ export class EmpDisplayComponent {
   }
 
   applyFilter() {
+    this.dataSource.filterPredicate = (data: unknown, filter: string) => this.getFilterPredicate()(data as Emp, filter);
     const position = this.userForm.get('position')!.value;
     const gender = this.userForm.get('gender')!.value;
     const minAge = this.userForm.get('min_age')!.value;
