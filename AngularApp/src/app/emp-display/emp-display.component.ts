@@ -108,6 +108,10 @@ export class EmpDisplayComponent {
       this.prepareData(); 
       this.setData();
     });
+    
+    this.http.get('http://localhost:8000' + '/get_all_titles').subscribe(data => {
+      this.titles = data;
+    });
 
     this.dataSource.filterPredicate = (data: unknown, filter: string) => this.getFilterPredicate()(data as Emp, filter);
   } 
