@@ -14,6 +14,7 @@ import { ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatInput } from '@angular/material/input';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-emp-display',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule, MatTableModule],
+  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule, MatTableModule, MatInput],
   templateUrl: './emp-display.component.html',
   styleUrl: './emp-display.component.css',
 })
@@ -87,7 +88,7 @@ export class EmpDisplayComponent {
     this.popupService.openDeleteConfPopup(id, 'employee');
   }
 
-  performFilter(){
-
+  doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 }

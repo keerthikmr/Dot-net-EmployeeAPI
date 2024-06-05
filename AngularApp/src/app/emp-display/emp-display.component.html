@@ -7,7 +7,8 @@
     </div>
 </div>
 <div class="filter-emp-btn">
-    <button mat-raised-button color="primary" (click)="performFilter()">Filter</button>
+    <!-- <button mat-raised-button color="primary" (click)="performFilter()">Filter</button> -->
+    <input matInput type="text" (keyup)="doFilter($any($event.target).value)" placeholder="Filter">
 </div>
 
 <div class="emp-container"> 
