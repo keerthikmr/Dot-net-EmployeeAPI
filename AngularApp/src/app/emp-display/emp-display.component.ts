@@ -95,16 +95,15 @@ export class EmpDisplayComponent {
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      position: ['', Validators.required],
-      department: ['', Validators.required],
-      gender: ['', Validators.required],
-      min_salary: ['', Validators.required],
-      max_salary: ['', Validators.required],
-      min_age: ['', Validators.required],
-      max_age: ['', Validators.required],
+      position: [''],
+      gender: [''],
+      min_salary: [''],
+      max_salary: [''],
+      min_age: [''],
+      max_age: [''],
     });
 
-    this.http.get(this.API_URL + '/get_all_employees').subscribe(async data => {
+    this.http.get(this.API_URL + '/get_all_employees').subscribe(data => {
       this.employees = data;
       
       this.prepareData(); 
