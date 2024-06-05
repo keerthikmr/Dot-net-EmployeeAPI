@@ -39,7 +39,7 @@
 }
 
 .mat-expansion-panel {
-    background-color: aliceblue;
+    background-color: rgb(250, 247, 247);
 }
 
 .mat-accordion {
@@ -56,8 +56,8 @@
 
 .search-div input {
     width: 100%;
+    padding: .5rem;
 }
-
 
 .field-div{
     display: flex;
