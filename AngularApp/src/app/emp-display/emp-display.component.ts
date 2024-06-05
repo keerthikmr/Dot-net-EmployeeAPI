@@ -45,9 +45,9 @@ export class EmpDisplayComponent {
     this.employees.forEach((employee: any) => {
       employee.age = this.getAge(employee.birth_date);
       employee.full_name = employee.first_name + ' ' + employee.last_name;
+      this.setData();
     });
-    console.log(this.employees)
-    this.setData();
+
   }
 
   setData() {
@@ -58,12 +58,10 @@ export class EmpDisplayComponent {
   ngOnInit() {
     this.http.get(this.API_URL + '/get_all_employees').subscribe(async data => {
       this.employees = data;
+      
+      this.prepareData(); 
+      this.setData();
     });
-    this.prepareData();
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
   }
 
   getAge(birthDate: string) {
