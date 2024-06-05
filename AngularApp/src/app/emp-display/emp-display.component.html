@@ -6,9 +6,92 @@
         <button mat-raised-button color="primary" (click)="goToPage('/employees/add')">Add Employee</button>
     </div>
 </div>
-<div class="filter-emp-btn">
-    <!-- <button mat-raised-button color="primary" (click)="performFilter()">Filter</button> -->
-    <input matInput type="text" (keyup)="doFilter($any($event.target).value)" placeholder="Filter">
+
+<div class="filterings">
+    <mat-accordion class="mat-accordion">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Apply Filters
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            
+            <form [formGroup]="userForm">
+                <div class="field-div">
+                    <span class="field-title">
+                        Position:
+                    </span>
+                    <mat-form-field class="form-field">
+                        <mat-select formControlName="position" placeholder="Position">
+                            <mat-option *ngFor="let title of titles" value={{title.title_id}}>{{title.title_name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                
+                <div class="field-div">
+                    <span class="field-title">
+                        Department
+                    </span>
+                    <mat-form-field class="form-field">
+                        <mat-select formControlName="department" placeholder="department">
+                            <mat-option *ngFor="let dept of depts" value={{dept.dept_no}}>{{dept.dept_name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                
+                <div class="field-div">
+                    <span class="field-title">
+                        Gender:
+                    </span>
+                    <mat-form-field class="form-field">
+                        <mat-select formControlName="gender" placeholder="Gender">
+                            <mat-option value="Male">Male</mat-option>
+                            <mat-option value="Female">Female</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                
+                <div class="field-div">
+                    <span class="field-title">
+                        Age:
+                    </span>
+                    <div class="form-field">
+                        <mat-form-field class="input-box">
+                            <input matInput formControlName="minAge" type="number" min="0"  max="150" placeholder="Min Age">
+                        </mat-form-field>
+
+                        <mat-form-field class="input-box">
+                            <input matInput formControlName="maxAge" type="number" min="0"  max="150" placeholder="Max Age">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                
+                <div class="field-div">
+                    <span class="field-title">
+                        Salary:
+                    </span>
+                    
+                    <div class="form-field">
+                        <mat-form-field class="input-box">
+                            <input matInput formControlName="minSalary" type="number" min="0" placeholder="Min Salary">
+                        </mat-form-field>
+
+                        <mat-form-field class="input-box">
+                            <input matInput formControlName="maxSalary" type="number" min="0" placeholder="Max Salary">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="search-div">
+        <input matInput type="text" (keyup)="doFilter($any($event.target).value)" placeholder="Search">
+    </div>
 </div>
 
 <div class="emp-container"> 

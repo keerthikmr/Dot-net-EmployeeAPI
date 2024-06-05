@@ -15,6 +15,14 @@ import { MatTable } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatInput } from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatFormField } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +30,7 @@ import { MatInput } from '@angular/material/input';
 @Component({
   selector: 'app-emp-display',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule, MatTableModule, MatInput],
+  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule, MatTableModule, MatInput, MatExpansionModule, MatFormField, MatSelectModule, FormsModule, FormsModule, ReactiveFormsModule, MatFormFieldModule],
   templateUrl: './emp-display.component.html',
   styleUrl: './emp-display.component.css',
 })
@@ -35,10 +43,15 @@ export class EmpDisplayComponent {
   new_employee: any = {};
   sortedData: any;
 
+  titles: any = [];
+  depts: any = [];
+
+  userForm: FormGroup = new FormGroup({});
+
   displayedColumns = ['emp_no', 'full_name', 'gender', 'age', 'position', 'salary', 'details', 'delete']
   dataSource = new MatTableDataSource(this.employees);
 
-  constructor(private http: HttpClient, private router: Router, private popupService: PopupService) {
+  constructor(private http: HttpClient, private router: Router, private popupService: PopupService, private fb: FormBuilder) {
     this.sortedData = this.employees.slice();
   }
 
@@ -57,6 +70,16 @@ export class EmpDisplayComponent {
   }
 
   ngOnInit() {
+    this.userForm = this.fb.group({
+      position: ['', Validators.required],
+      department: ['', Validators.required],
+      gender: ['', Validators.required],
+      min_salary: ['', Validators.required],
+      max_salary: ['', Validators.required],
+      min_age: ['', Validators.required],
+      max_age: ['', Validators.required],
+    });
+
     this.http.get(this.API_URL + '/get_all_employees').subscribe(async data => {
       this.employees = data;
       
@@ -90,5 +113,9 @@ export class EmpDisplayComponent {
 
   doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  performFilter() {
+
   }
 }
