@@ -30,11 +30,10 @@ export class EmpDetailComponent {
       
       this.employee = data;
       this.employee = this.employee[0];
+
+      this.employee.birth_date = this.employee.birth_date.slice(0,10);
+      this.employee.hired_date = this.employee.hired_date.slice(0,10)
     });
-  }
-  
-  sliceFunction(data:any){
-    return data.slice(0,10);
   }
   
   closePopup() {
