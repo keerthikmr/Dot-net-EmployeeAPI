@@ -11,12 +11,11 @@ namespace EmployeeAPI.Controllers
     public class EmployeeController : ControllerBase
     {
         private IConfiguration _configuration;
-
-        public EmployeeController(IConfiguration configuration)
+        private ILogger<EmployeeController> _logger;
+        public EmployeeController(IConfiguration configuration, ILogger<EmployeeController> logger)
         {
             _configuration = configuration;
         }
-
         [HttpGet("get_all_employees")]
 
         public JsonResult get_all_employees()
@@ -409,5 +408,66 @@ namespace EmployeeAPI.Controllers
 
             return new JsonResult("Title deleted Successfully");
         }
+
+
+        [HttpGet("authenticate")]
+        public JsonResult Authenticate()
+        {
+            string query = "select * from credentials";
+            DataTable table = new DataTable();
+
+            string SqlDatasource = _configuration.GetConnectionString("employee");
+            SqlDataReader myReader;
+
+            using (SqlConnection mycon = new SqlConnection(SqlDatasource))
+            {
+                mycon.Open();
+
+                using (SqlCommand myCommand = new SqlCommand(query, mycon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                }
+            }
+
+            System.Diagnostics.Debug.WriteLine(table);
+
+            return new JsonResult(table);
+        }
+
+
+        [HttpGet("get_employee_image/{emp_no}")]
+        public async Task<IActionResult> GetEmployeeImage(int emp_no)
+        {
+            string query = "SELECT image FROM employee WHERE emp_no = @emp_no";
+            byte[] imageBytes = null;
+
+            string dataSource = _configuration.GetConnectionString("employee");
+
+            using (SqlConnection connection = new SqlConnection(dataSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@emp_no", emp_no);
+                    var result = await command.ExecuteScalarAsync();
+                    if (result != DBNull.Value)
+                    {
+                        imageBytes = (byte[])result;
+                    }
+                }
+            }
+
+            if (imageBytes != null)
+            {
+                return File(imageBytes, "image/jpeg");
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
     }
 }
