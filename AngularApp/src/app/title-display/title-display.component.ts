@@ -37,7 +37,7 @@ export class TitleDisplayComponent {
     });
   }
 
-  getDeptName(dept_no: number) { // Change logic
+  getDeptName(dept_no: number) {
     let i: number;
     for (i=0; i< this.depts.length; i++){
       if (this.depts[i].dept_no == dept_no) {

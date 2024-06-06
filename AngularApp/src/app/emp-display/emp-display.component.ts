@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator } from '@angular/material/paginator';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export interface Emp {
   age: number;
@@ -62,6 +63,7 @@ export class EmpDisplayComponent {
 
   titles: any = [];
   depts: any = [];
+  image: any;
 
   userForm: FormGroup = new FormGroup({});
   position = '';
@@ -75,7 +77,7 @@ export class EmpDisplayComponent {
   displayedColumns = ['emp_no', 'full_name', 'gender', 'age', 'position', 'salary', 'details', 'delete']
   dataSource = new MatTableDataSource(this.employees);
 
-  constructor(private http: HttpClient, private router: Router, private popupService: PopupService, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private router: Router, private popupService: PopupService, private fb: FormBuilder,  private sanitizer: DomSanitizer) {
     this.sortedData = this.employees.slice();
   }
 
@@ -115,6 +117,17 @@ export class EmpDisplayComponent {
     });
 
     this.dataSource.filterPredicate = (data: unknown, filter: string) => this.getFilterPredicate()(data as Emp, filter);
+
+    this.getImage();
+  } 
+
+  
+  getImage() {
+    this.http.get(`http://localhost:5000/get_employee_image/1027`, { responseType: 'blob' })
+      .subscribe(response => {
+        let objectURL = URL.createObjectURL(response);
+        this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      });
   } 
 
   ngAfterViewInit() {
