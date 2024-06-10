@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -46,7 +46,7 @@ export interface Emp {
 @Component({
   selector: 'app-emp-display',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule, MatTableModule, MatInput, MatExpansionModule, MatFormField, MatSelectModule, FormsModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatPaginator],
+  imports: [CommonModule, MatListModule, MatButtonModule, EmpDetailComponent, MatIconModule, MatSortModule, MatTableModule, MatInput, MatExpansionModule, MatFormField, MatSelectModule, FormsModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatPaginator],
   templateUrl: './emp-display.component.html',
   styleUrl: './emp-display.component.css',
 })
@@ -118,7 +118,7 @@ export class EmpDisplayComponent {
 
     this.dataSource.filterPredicate = (data: unknown, filter: string) => this.getFilterPredicate()(data as Emp, filter);
 
-    this.getImage();
+    // this.getImage();
   } 
 
   
