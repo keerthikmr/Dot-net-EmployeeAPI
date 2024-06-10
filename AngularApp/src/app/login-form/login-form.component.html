@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card id="register-card">
     <mat-card-header>
         <mat-card-title>Register</mat-card-title>
     </mat-card-header>
@@ -18,10 +18,11 @@
             <br>
             <button mat-raised-button color="primary" (click)="register(registerDto)">Register</button>
         </form>
+        <div>Already have an account? <button (click)="toLoginForm()" class="anchor-imposter">Login</button> instead</div>
     </mat-card-content>
 </mat-card>
 
-<mat-card>
+<mat-card id="login-card">
     <mat-card-header>
         <mat-card-title>Login</mat-card-title>
     </mat-card-header>
@@ -37,5 +38,6 @@
             <br>
             <button mat-raised-button color="primary" (click)="login(loginDto)">Login</button>
         </form>
+        <div>Don't have an account? <button (click)="toRegisterForm()" class="anchor-imposter">Register</button> instead</div>
     </mat-card-content>
 </mat-card>

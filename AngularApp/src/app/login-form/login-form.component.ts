@@ -36,7 +36,10 @@ export class LoginFormComponent {
   
   login(loginDto: Login) {
     this.authService.login(loginDto).subscribe((jwtDto) => {
-      localStorage.setItem('jwtToken', jwtDto.token);
+      if (jwtDto.token != null){
+        localStorage.setItem('jwtToken', jwtDto.token);
+        this.router.navigate(['/employees']);
+      }
     });
   }
 
@@ -49,26 +52,17 @@ export class LoginFormComponent {
       email : ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    document.getElementById('register-card')!.style.display = 'none';
   }
   
-  // loginSubmit(form: FormGroup) {
+  toLoginForm(){
+    document.getElementById('register-card')!.style.display = 'none';
+    document.getElementById('login-card')!.style.display = 'block';
+  }
 
-  //   if (form.valid) {
-  //     const formData = new FormData();
-
-  //     formData.append('username', form.value.username);
-  //     formData.append('password', form.value.password);
-
-  //     this.http.get('http://localhost:8000' + '/authenticate').subscribe(data => {
-  //       this.credentials = data;
-  //       console.log(this.credentials);
-        
-  //       this.credentials.forEach((credential: any) => {
-  //         if (credential.username === form.value.username && credential.password === form.value.password) {
-  //           this.router.navigate(['/employees']);
-  //         }
-  //       });
-  //     });
-  //   }
-  // }
+  toRegisterForm(){
+    document.getElementById('register-card')!.style.display = 'block';
+    document.getElementById('login-card')!.style.display = 'none';
+  }
 }
