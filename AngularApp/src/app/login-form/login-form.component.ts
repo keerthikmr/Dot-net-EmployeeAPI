@@ -8,6 +8,10 @@ import { FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Login } from '../models/login';
+import { Register } from '../models/register';
+import { JwtAuth } from '../models/jwtAuth';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login-form',
@@ -18,7 +22,23 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent {
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router){}
+  loginDto = new Login();
+  registerDto = new Register();
+  jwtDto = new JwtAuth();
+
+
+
+  constructor(private authService: AuthenticationService, private fb: FormBuilder, private http: HttpClient, private router: Router){}
+
+  register(registerDto: Register) {
+    this.authService.register(registerDto).subscribe();
+  }
+  
+  login(loginDto: Login) {
+    this.authService.login(loginDto).subscribe((jwtDto) => {
+      localStorage.setItem('jwtToken', this.jwtDto.token);
+    });
+  }
 
   userForm: FormGroup = new FormGroup({});
 
@@ -26,6 +46,7 @@ export class LoginFormComponent {
   ngOnInit() {
     this.userForm = this.fb.group({
       username: ['', Validators.required],
+      email : ['', Validators.required],
       password: ['', Validators.required]
     });
   }
