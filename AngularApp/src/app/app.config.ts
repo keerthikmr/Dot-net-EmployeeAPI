@@ -8,7 +8,7 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi
 import { AuthenticationInterceptor } from './services/interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(), provideHttpClient(withFetch(), withInterceptors([AuthenticationInterceptor]))]
+  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(), provideHttpClient(withInterceptors([AuthenticationInterceptor]))]
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: AuthenticationInterceptor,
