@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using System.Data;
-using System.Reflection.PortableExecutable;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,6 +17,7 @@ namespace EmployeeAPI.Controllers
         {
             _configuration = configuration;
         }
+
         [HttpGet("get_all_employees")]
 
         public JsonResult get_all_employees()

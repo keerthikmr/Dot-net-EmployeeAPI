@@ -8,6 +8,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
+using System.Data;
+using System.Security.Claims;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -42,7 +45,7 @@ public class AuthController: ControllerBase
             var newUser = new IdentityUser()
             {
                 Email = requestDTO.Email,
-                UserName = requestDTO.Email
+                UserName = requestDTO.Name
             };
 
             var isCreated = await _userManager.CreateAsync(newUser, requestDTO.Password);
@@ -86,6 +89,7 @@ public class AuthController: ControllerBase
             if (isPasswordValid)
             {
                 var token = GenerateJwtToken(existingUser);
+
                 return Ok(new LoginRequestResponse
                 {
                     Token = token,
@@ -98,6 +102,8 @@ public class AuthController: ControllerBase
 
         return BadRequest("Invalid request");
     }
+
+
 
     private string GenerateJwtToken(IdentityUser user)
     {
@@ -118,5 +124,19 @@ public class AuthController: ControllerBase
 
         var token = jwtTokenHandler.CreateToken(tokenDescriptor);
         return jwtTokenHandler.WriteToken(token);
+    }
+
+    [HttpGet("get_logged_user")]
+    public async Task<IActionResult> get_logged_user()
+    {
+        var username = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        System.Diagnostics.Debug.WriteLine("EMAILLLLL: " + username);
+        var user = await _userManager.FindByEmailAsync(username!);
+
+        var name = user!.UserName;
+
+
+        //User.GetUserId();
+        return new JsonResult(username + name);
     }
 }
