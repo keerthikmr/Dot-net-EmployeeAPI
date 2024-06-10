@@ -4,10 +4,13 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Reflection.PortableExecutable;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace EmployeeAPI.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EmployeeController : ControllerBase
     {
         private IConfiguration _configuration;
