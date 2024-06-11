@@ -85,5 +85,17 @@
             <mat-datepicker #hiredPicker></mat-datepicker>
         </mat-form-field>
     </div>
+
+    <div class="field-div">
+        <span class="field-title">
+            Profile picture:
+        </span>
+        <mat-form-field class="form-field">
+            <input matInput formControlName="file_input" id="file-input" hidden type="text" >
+            
+            <input type="file" id="file-input" accept="image"  />
+        </mat-form-field>
+    </div>
+    
     <button mat-raised-button class="emp-submit-btn" color="accent" type="submit" color="primary" >Submit</button>
   </form>

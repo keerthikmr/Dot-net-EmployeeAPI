@@ -37,7 +37,8 @@ export class EmpAddFormComponent implements OnInit {
       title: ['', Validators.required],
       hired_date: ['', Validators.required],
       salary_modifier: ['', Validators.required],
-      sal_operation: ['', Validators.required]
+      sal_operation: ['', Validators.required],
+      file_input: ['']
     });
     
     this.http.get('http://localhost:8000' + '/get_all_titles').subscribe(data => {
@@ -82,5 +83,9 @@ export class EmpAddFormComponent implements OnInit {
           console.error(error);
         });
     }
+  }
+
+  openPicInput() {
+    document.getElementById("file-input")!.click();
   }
 }

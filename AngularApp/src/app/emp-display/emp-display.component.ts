@@ -107,7 +107,7 @@ export class EmpDisplayComponent {
 
     this.http.get(this.API_URL + '/get_all_employees').subscribe(data => {
       this.employees = data;
-      console.log(this.employees)
+
       this.prepareData(); 
       this.setData();
     });
