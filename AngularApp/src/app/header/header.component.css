@@ -24,6 +24,9 @@ ul {
 
 .header-profile-img {
     cursor: pointer;
+    font-size: 2rem;
+    height: 2rem;
+    width: 2rem;
 }
 
 .profile-container {
