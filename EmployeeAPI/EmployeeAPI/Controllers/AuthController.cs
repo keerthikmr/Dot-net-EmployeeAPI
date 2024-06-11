@@ -8,9 +8,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
 using System.Data;
-using System.Security.Claims;
+using System.Text.Json;
+
 
 [ApiController]
 [Route("api/[controller]")]
@@ -114,6 +114,8 @@ public class AuthController: ControllerBase
             Subject = new ClaimsIdentity(new[]
             {
                 new Claim("Id", user.Id),
+                new Claim("Email", user.Email!),
+                new Claim("UserName", user.UserName!),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
@@ -127,16 +129,14 @@ public class AuthController: ControllerBase
     }
 
     [HttpGet("get_logged_user")]
-    public async Task<IActionResult> get_logged_user()
-    {
-        var username = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        System.Diagnostics.Debug.WriteLine("EMAILLLLL: " + username);
-        var user = await _userManager.FindByEmailAsync(username!);
+    public JsonResult get_logged_user()
+    {   
+        var obj = new
+        {
+            Email = User.FindFirstValue("Email"),
+            UserName = User.FindFirstValue("UserName")
+        };
 
-        var name = user!.UserName;
-
-
-        //User.GetUserId();
-        return new JsonResult(username + name);
+        return new JsonResult(obj);
     }
 }
