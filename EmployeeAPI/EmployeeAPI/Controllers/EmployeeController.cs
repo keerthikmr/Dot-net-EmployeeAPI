@@ -22,7 +22,7 @@ namespace EmployeeAPI.Controllers
 
         public JsonResult get_all_employees()
         {
-            string query = "select emp_no, first_name, last_name, gender, birth_date, hired_date, title_name, salary from employee left join titles on employee.title_id = titles.title_id;";
+            string query = "select emp_no, first_name, last_name, gender, birth_date, hired_date, title_name, salary, profile from employee left join titles on employee.title_id = titles.title_id;";
             DataTable table = new DataTable();
 
             string dataSource = _configuration.GetConnectionString("employee");
@@ -305,7 +305,6 @@ namespace EmployeeAPI.Controllers
         }
 
         [HttpGet("get_all_titles")]
-
         public JsonResult get_all_titles()
         {
             string query = "select * from titles";
@@ -438,38 +437,38 @@ namespace EmployeeAPI.Controllers
         }
 
 
-        [HttpGet("get_employee_image/{emp_no}")]
-        public async Task<IActionResult> GetEmployeeImage(int emp_no)
-        {
-            string query = "SELECT image FROM employee WHERE emp_no = @emp_no";
-            byte[] imageBytes = null;
+    //    [HttpGet("get_employee_image/{emp_no}")]
+    //    public async Task<IActionResult> GetEmployeeImage(int emp_no)
+    //    {
+    //        string query = "SELECT image FROM employee WHERE emp_no = @emp_no";
+    //        byte[] imageBytes = null;
 
-            string dataSource = _configuration.GetConnectionString("employee");
+    //        string dataSource = _configuration.GetConnectionString("employee");
 
-            using (SqlConnection connection = new SqlConnection(dataSource))
-            {
-                connection.Open();
+    //        using (SqlConnection connection = new SqlConnection(dataSource))
+    //        {
+    //            connection.Open();
 
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@emp_no", emp_no);
-                    var result = await command.ExecuteScalarAsync();
-                    if (result != DBNull.Value)
-                    {
-                        imageBytes = (byte[])result;
-                    }
-                }
-            }
+    //            using (SqlCommand command = new SqlCommand(query, connection))
+    //            {
+    //                command.Parameters.AddWithValue("@emp_no", emp_no);
+    //                var result = await command.ExecuteScalarAsync();
+    //                if (result != DBNull.Value)
+    //                {
+    //                    imageBytes = (byte[])result;
+    //                }
+    //            }
+    //        }
 
-            if (imageBytes != null)
-            {
-                return File(imageBytes, "image/jpeg");
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+    //        if (imageBytes != null)
+    //        {
+    //            return File(imageBytes, "image/jpeg");
+    //        }
+    //        else
+    //        {
+    //            return NotFound();
+    //        }
+    //    }
 
     }
 }
