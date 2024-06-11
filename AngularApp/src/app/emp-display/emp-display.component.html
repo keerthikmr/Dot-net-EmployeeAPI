@@ -82,6 +82,13 @@
 <div class="emp-container"> 
     <mat-table #table [dataSource]="dataSource" class="emp-table" matSort >
             
+        <ng-container matColumnDef="profile_image" class="mat-column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header="profile_image"> Profile </mat-header-cell>
+            <mat-cell *matCellDef="let emp"> 
+                <img [src]="this.getImage(emp.profile)" class="profile-img">
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="emp_no" class="mat-column">
             <mat-header-cell *matHeaderCellDef mat-sort-header="emp_no"> Emp. Number </mat-header-cell>
             <mat-cell *matCellDef="let emp"> {{emp.emp_no}} </mat-cell>

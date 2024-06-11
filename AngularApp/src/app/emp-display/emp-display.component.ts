@@ -7,19 +7,18 @@ import { Router } from '@angular/router';
 import { PopupService } from '../popup/popup.service';
 import { EmpDetailComponent } from '../emp-detail/emp-detail.component';
 import { Injectable } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import { Sort, MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatInput } from '@angular/material/input';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormField } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormGroup } from '@angular/forms';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -64,6 +63,7 @@ export class EmpDisplayComponent {
   titles: any = [];
   depts: any = [];
   image: any;
+  imageSrc: any;
 
   userForm: FormGroup = new FormGroup({});
   position = '';
@@ -74,7 +74,7 @@ export class EmpDisplayComponent {
   minSalary = 0;
   maxSalary = 0;
 
-  displayedColumns = ['emp_no', 'full_name', 'gender', 'age', 'position', 'salary', 'details', 'delete']
+  displayedColumns = ['profile_image', 'emp_no', 'full_name', 'gender', 'age', 'position', 'salary', 'details', 'delete']
   dataSource = new MatTableDataSource(this.employees);
 
   constructor(private http: HttpClient, private router: Router, private popupService: PopupService, private fb: FormBuilder,  private sanitizer: DomSanitizer) {
@@ -107,7 +107,7 @@ export class EmpDisplayComponent {
 
     this.http.get(this.API_URL + '/get_all_employees').subscribe(data => {
       this.employees = data;
-      
+      console.log(this.employees)
       this.prepareData(); 
       this.setData();
     });
@@ -117,17 +117,11 @@ export class EmpDisplayComponent {
     });
 
     this.dataSource.filterPredicate = (data: unknown, filter: string) => this.getFilterPredicate()(data as Emp, filter);
-
-    // this.getImage();
   } 
 
-  
-  getImage() {
-    this.http.get(`http://localhost:5000/get_employee_image/1027`, { responseType: 'blob' })
-      .subscribe(response => {
-        let objectURL = URL.createObjectURL(response);
-        this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-      });
+  getImage(blob_string: string) {
+    this.imageSrc = 'data:image/jpeg;base64,' + blob_string;
+    return this.imageSrc;
   } 
 
   ngAfterViewInit() {
