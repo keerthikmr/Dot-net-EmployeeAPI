@@ -32,6 +32,7 @@ export class LoginFormComponent {
 
   register(registerDto: Register) {
     this.authService.register(registerDto).subscribe();
+    this.toLoginForm();
   }
   
   login(loginDto: Login) {
