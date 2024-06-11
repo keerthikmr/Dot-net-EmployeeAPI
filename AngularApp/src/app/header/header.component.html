@@ -24,10 +24,31 @@
           </li>
           <li class="header-list-item">
             <div>
-                <mat-icon (click)="viewProfile()" class="profile-img">account_circle</mat-icon>
+                <mat-icon (click)="viewProfile()" class="header-profile-img">account_circle</mat-icon>
             </div>
           </li>
         </ul>
       </nav>
     </div>
+</div>
+
+<div class="profile-container" *ngIf="profileShown">
+  <div class="profile-content">
+    <div class="profile-header">
+      <h2>Profile</h2>
+    </div>
+
+    <div class="profile-body">
+      <div class="profile-image">
+        <mat-icon class="profile-img">account_circle</mat-icon>
+      </div>
+      <div class="profile-details">
+        <p>{{profile.userName}}</p>
+        <p>{{profile.email}}</p>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+      </div>
+    </div>
   </div>
+</div>
