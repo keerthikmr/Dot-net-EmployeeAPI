@@ -63,7 +63,6 @@ export class EmpAddFormComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup ) {
-    console.log(form)
     if (form.valid) {
       const formData = new FormData();
       formData.append('first_name', form.value.first_name);
@@ -85,7 +84,16 @@ export class EmpAddFormComponent implements OnInit {
     }
   }
 
-  openPicInput() {
-    document.getElementById("file-input")!.click();
-  }
+  getBaseUrl ()  {
+    let file: any = document.querySelector('input[type=file]');
+    file = file['files'][0];
+
+    const reader = new FileReader();
+    let baseString;
+    reader.onloadend = function () {
+        baseString = reader.result;
+        console.log(baseString); 
+    };
+    reader.readAsDataURL(file);
+}
 }
