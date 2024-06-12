@@ -4,6 +4,7 @@ using System.Data;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+//using static System.Net.Mime.MediaTypeNames;
 
 namespace EmployeeAPI.Controllers
 {
@@ -66,7 +67,7 @@ namespace EmployeeAPI.Controllers
         }
 
         [HttpPost("add_employee")]
-        public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date, [FromForm] int title_id, [FromForm] int base_salary, [FromForm] string sal_operation, [FromForm] int salary_modifier)
+        public JsonResult add_employee([FromForm] string first_name, [FromForm] string last_name, [FromForm] string gender, [FromForm] string birth_date, [FromForm] string hired_date, [FromForm] int title_id, [FromForm] int base_salary, [FromForm] string sal_operation, [FromForm] int salary_modifier, [FromForm] string profile_image)
         {
             int salary;
 
@@ -79,7 +80,7 @@ namespace EmployeeAPI.Controllers
             }
 
 
-            string query = "insert into employee values (@first_name, @last_name, @gender, @birth_date, @hired_date, @title_id, @salary)";
+            string query = "insert into employee values (@first_name, @last_name, @gender, @birth_date, @hired_date, @title_id, @salary, @profile_image)";
             DataTable table = new DataTable();
 
             string SqlDatasource = _configuration.GetConnectionString("employee");
@@ -99,6 +100,7 @@ namespace EmployeeAPI.Controllers
                     myCommand.Parameters.AddWithValue("@hired_date", hired_date);
                     myCommand.Parameters.AddWithValue("@title_id", title_id);
                     myCommand.Parameters.AddWithValue("@salary", salary);
+                    myCommand.Parameters.AddWithValue("@profile_image", profile_image);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -435,40 +437,5 @@ namespace EmployeeAPI.Controllers
 
             return new JsonResult(table);
         }
-
-
-    //    [HttpGet("get_employee_image/{emp_no}")]
-    //    public async Task<IActionResult> GetEmployeeImage(int emp_no)
-    //    {
-    //        string query = "SELECT image FROM employee WHERE emp_no = @emp_no";
-    //        byte[] imageBytes = null;
-
-    //        string dataSource = _configuration.GetConnectionString("employee");
-
-    //        using (SqlConnection connection = new SqlConnection(dataSource))
-    //        {
-    //            connection.Open();
-
-    //            using (SqlCommand command = new SqlCommand(query, connection))
-    //            {
-    //                command.Parameters.AddWithValue("@emp_no", emp_no);
-    //                var result = await command.ExecuteScalarAsync();
-    //                if (result != DBNull.Value)
-    //                {
-    //                    imageBytes = (byte[])result;
-    //                }
-    //            }
-    //        }
-
-    //        if (imageBytes != null)
-    //        {
-    //            return File(imageBytes, "image/jpeg");
-    //        }
-    //        else
-    //        {
-    //            return NotFound();
-    //        }
-    //    }
-
     }
 }
