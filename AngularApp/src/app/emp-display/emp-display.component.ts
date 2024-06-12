@@ -120,7 +120,7 @@ export class EmpDisplayComponent {
   } 
 
   getImage(blob_string: string) {
-    this.imageSrc = 'data:image/jpeg;base64,' + blob_string;
+    this.imageSrc = blob_string;
     return this.imageSrc;
   } 
 

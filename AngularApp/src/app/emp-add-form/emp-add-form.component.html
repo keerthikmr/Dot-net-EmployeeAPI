@@ -93,7 +93,7 @@
         <mat-form-field class="form-field">
             <input matInput formControlName="file_input" id="file-input" hidden type="text" >
             
-            <input type="file" id="file-input" accept="image"  />
+            <input type="file" id="file-input" accept=".png, .jpg, .jpeg" (change)="getBaseUrl()"/>
         </mat-form-field>
     </div>
     

@@ -5,7 +5,7 @@ import { MatDatepickerModule } from  '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { DateAdapter } from '@angular/material/core';
@@ -14,13 +14,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-emp-add-form',
   standalone: true,
-  imports: [MatButtonModule, CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatNativeDateModule, MatInputModule],
+  imports: [MatButtonModule, CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatNativeDateModule, MatInputModule],
   templateUrl: './emp-add-form.component.html',
   styleUrl: './emp-add-form.component.css'
 })
 export class EmpAddFormComponent implements OnInit {
   
   titles: any = [];
+  profile_byte_string: any = '';
 
   userForm: FormGroup = new FormGroup({});
 
@@ -74,6 +75,7 @@ export class EmpAddFormComponent implements OnInit {
       formData.append('salary_modifier', form.value.salary_modifier);
       formData.append('base_salary', this.titles[form.value.title - 1].base_salary);
       formData.append('sal_operation', form.value.sal_operation);
+      formData.append('profile_image', this.profile_byte_string);
 
       this.http.post('http://localhost:8000/add_employee', formData).subscribe((response) => {
           console.log(response);
@@ -88,12 +90,15 @@ export class EmpAddFormComponent implements OnInit {
     let file: any = document.querySelector('input[type=file]');
     file = file['files'][0];
 
+    const self = this;
+    
     const reader = new FileReader();
     let baseString;
     reader.onloadend = function () {
         baseString = reader.result;
         console.log(baseString); 
+        self.profile_byte_string = baseString;
     };
     reader.readAsDataURL(file);
-}
+  }
 }
