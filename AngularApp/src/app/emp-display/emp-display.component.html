@@ -114,11 +114,6 @@
             <mat-cell *matCellDef="let emp"> {{emp.title_name}} </mat-cell>
         </ng-container>
         
-        <ng-container matColumnDef="salary" class="mat-column">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Salary </mat-header-cell>
-            <mat-cell *matCellDef="let emp"> {{emp.salary}} </mat-cell>
-        </ng-container>
-        
         <ng-container matColumnDef="details" class="mat-column">
             <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
             <mat-cell *matCellDef="let emp">

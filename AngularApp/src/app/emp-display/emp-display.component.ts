@@ -74,7 +74,7 @@ export class EmpDisplayComponent {
   minSalary = 0;
   maxSalary = 0;
 
-  displayedColumns = ['profile_image', 'emp_no', 'full_name', 'gender', 'age', 'position', 'salary', 'details', 'delete']
+  displayedColumns = ['profile_image', 'emp_no', 'full_name', 'gender', 'age', 'position', 'details', 'delete']
   dataSource = new MatTableDataSource(this.employees);
 
   constructor(private http: HttpClient, private router: Router, private popupService: PopupService, private fb: FormBuilder,  private sanitizer: DomSanitizer) {
