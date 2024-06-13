@@ -85,3 +85,34 @@
     height: 80%;
     border-radius: 50%;
 }
+
+.mat-column-details{
+    flex: none;   
+    width: 10%;
+}
+
+.mat-column-delete{
+    flex: none;   
+    width: 10%;
+}
+
+
+.mat-column-age{
+    flex: none;   
+    width: 10%;
+}
+
+.mat-column-emp_no{
+    flex: none;   
+    width: 10%;
+}
+
+.mat-column-profile_image{
+    flex: none;   
+    width: 10%;
+}
+
+.mat-column-gender{
+    flex: none;   
+    width: 10%;
+}
